@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 from collections import Counter
 
 # - Loading the data
-df = pd.read_excel(r'.\\99_wecs_data.csv')
+df = pd.read_excel(r'99_wecs_data.csv')
 
 # - Heading
 
