@@ -6,6 +6,8 @@ from matplotlib import pyplot as plt
 
 from collections import Counter
 
+# - Loading the data
+df = pd.read_excel(r'99_wecs_data.csv')
 
 # - Heading
 
@@ -22,6 +24,8 @@ In this website you can *explore* the **wind turbine** that best suits your need
 '* Onshore/Offshore'
 '* Power and performance (cp) curve'
 ' '
+
+
 
 # - Selecting the parameters
 st.write("""	### Select the rated power	""")
@@ -52,8 +56,6 @@ elif of == 'Onshore':
 ''
 
 '### Results 📊'
-# - Loading the data
-df = pd.read_excel(r'C:\\users\\Alberto\\Desktop\\code\\Cursos\\DS_Scratch\\data-science-from-scratch-master\\scratch - copia\\99_wecs_data.xlsx')
 
 # Filterig data
 df_selected_wecs = df[(df.Type.isin(type_selected)) & (df['RatedPower'].between(rated_power_min,rated_power_max, inclusive=False)) & (df["Offshore?"]==of)]
