@@ -6,4 +6,4 @@ pandas==1.1.1
 pandocfilters==1.4.2
 scipy==1.5.4
 seaborn==0.11.0
-yfinance==0.1.55
+xlrd==1.1.0
