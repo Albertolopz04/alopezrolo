@@ -56,7 +56,7 @@ elif of == 'Onshore':
 '### Results 📊'
 
 # - Loading the data
-df = pd.read_excel('99_wecs_data.xlsx')#, encoding='latin-1')
+df = pd.read_csv('99_wecs_data.csv', encoding='latin-1')
 # Filterig data
 df_selected_wecs = df[(df['RatedPower'].between(rated_power_min,rated_power_max, inclusive=False)) & (df["Type"].isin(type_selected)) & (df["Offshore?"]==of)]
 #df_selected_wecs = df[(df.Type.isin(type_selected)) & (df.RatedPower == rated_power_selected) & (df["Offshore?"]==of)]
