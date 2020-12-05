@@ -1,4 +1,4 @@
-Number_id;Brand_id;Brand;Names;RatedPower;Rotor Diameter;Typenum;Offshore?;Webpage
+Number_id;Brand_id;Brand;Names;RatedPower;Rotor Diameter;Type;Offshore?;Webpage
 1;1;Acciona;'Acciona AW 70/1500 Class I';1500;70;2;0;http://www.acciona-windpower.es/productos-y-servicios/
 2;1;Acciona;'Acciona AW 70/1500 Class II';1500;70;2;0;http://www.acciona-windpower.es/productos-y-servicios/
 3;1;Acciona;'Acciona AW 77/1500 Class II';1500;77;2;0;http://www.acciona-windpower.es/productos-y-servicios/
