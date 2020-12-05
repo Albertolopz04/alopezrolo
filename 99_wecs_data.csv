@@ -1,4 +1,4 @@
-Number_id;Brand_id;Brand;Names;RatedPower;Rotor Diameter;Type;Offshore?;Webpage
+Number_id;Brand_id;Brand;Names;RatedPower;Rotor Diameter;Typenum;Offshore?;Webpage
 1;1;Acciona;'Acciona AW 70/1500 Class I';1500;70;2;0;http://www.acciona-windpower.es/productos-y-servicios/
 2;1;Acciona;'Acciona AW 70/1500 Class II';1500;70;2;0;http://www.acciona-windpower.es/productos-y-servicios/
 3;1;Acciona;'Acciona AW 77/1500 Class II';1500;77;2;0;http://www.acciona-windpower.es/productos-y-servicios/
@@ -61,7 +61,7 @@ Number_id;Brand_id;Brand;Names;RatedPower;Rotor Diameter;Type;Offshore?;Webpage
 60;17;;'EWT DW52-900';900;52;2;0;http://www.ewtdirectwind.com/
 61;17;;'EWT DW54-500';500;54;2;0;http://www.ewtdirectwind.com/
 62;17;;'EWT DW54-900';900;54;2;0;http://www.ewtdirectwind.com/
-63;18;;'Fuhrl‰nder FL 1500 77m';1500;77;3;0;
+63;18;;'Fuhrl√§nder FL 1500 77m';1500;77;3;0;
 64;19;;'Gamesa G114-2.0 MW';2000;114;3;0;http://www.gamesacorp.com/en/products-and-services/wind-turbines/
 65;19;;'Gamesa G114-2.5 MW';2500;114;3;0;http://www.gamesacorp.com/en/products-and-services/wind-turbines/
 66;19;;'Gamesa G128-4.5 MW';4500;128;4;0;http://www.gamesacorp.com/en/products-and-services/wind-turbines/
