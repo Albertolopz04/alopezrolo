@@ -58,12 +58,12 @@ elif of == 'Onshore':
 # - Loading the data
 df = pd.read_csv('99_wecs_data.csv', error_bad_lines=False, encoding='latin-1')
 # Filterig data
-df_selected_wecs = df[(df["Typenum"].isin(type_selected)) & (df['RatedPower'].between(rated_power_min,rated_power_max, inclusive=False)) & (df["Offshore?"]==of)]
+df_selected_wecs = df[(df['RatedPower'].between(rated_power_min,rated_power_max, inclusive=False)) & (df["Type"].isin(type_selected)) & (df["Offshore?"]==of)]
 #df_selected_wecs = df[(df.Type.isin(type_selected)) & (df.RatedPower == rated_power_selected) & (df["Offshore?"]==of)]
 
 # - Displaying the data
 st.write('These are the WECS that match your parameters: ' + str(df_selected_wecs.shape[0]) + ' WECS.' )
-df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Typenum']]
+df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
 
 # - Data unfiltered (hidden in a button)
 ''
