@@ -11,10 +11,10 @@ from collections import Counter
 
 st.title('🔎 WECS Comparator v.2')
 st.write("""
-In this website you can *explore* the **wind turbine** that best suits your needs
+In this website you can *explore* the **wind turbine** that best suits your needs.
 """	)
 
-'This project is a program able to provide a list of candidate wind turbines (WECS) to the user once he has decided what he is looking for. The user is able to observe and compare freely any turbine of the library whenever he wants. The software is mainly an array with different types of inputs which are filtered depending on the user choice. The wanted values from this array are extracted with pointers and located with for and if. Once the WECS are filtered the following values will be displayed'
+'This project is a webapp able to provide a list of candidate wind turbines (WECS) to the user once he has decided what he is looking for. The user is able to observe and compare freely any turbine of the library whenever he wants. Once the WECS are filtered the following values will be displayed'
 '* Manufacturer name'
 '* Nominal Power'
 '* Type'
@@ -39,7 +39,7 @@ rated_power_max = rated_power_selected + interval
 st.write("""	### Select the type of generator	""")
 type_selected=st.multiselect('Type', ['1','2','3','4'],['1','2','3','4'])
 
-st.write("""	### Select whether the WECS is designed for Offshore/Onshore	""")
+st.write("""	### Select whether the WECS is designed for Onshore/Offshore	""")
 offshore_selected = st.selectbox('Onshore/Offshore',
 	['Onshore', 'Offshore'])
 
