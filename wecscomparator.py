@@ -59,38 +59,33 @@ elif of == 'Onshore':
 '### Results 📊'
 
 # - Loading the data
-df = pd.read_csv('99_wecs_data.csv', delimiter=';', error_bad_lines=False, encoding='latin-1')
+#df = pd.read_csv('99_wecs_data.csv', delimiter=';', error_bad_lines=False, encoding='latin-1')
 # Filterig data
-df_selected_wecs = df[(df['RatedPower'].between(rated_power_min,rated_power_max, inclusive=False)) & (df["Type"].isin(type_selected)) & (df["Offshore?"]==of)]
+#df_selected_wecs = df[(df['RatedPower'].between(rated_power_min,rated_power_max, inclusive=False)) & (df["Type"].isin(type_selected)) & (df["Offshore?"]==of)]
 #df_selected_wecs = df[(df.Type.isin(type_selected)) & (df.RatedPower == rated_power_selected) & (df["Offshore?"]==of)]
+wecs_selected = wecs[(wecs.data=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
 # - Displaying the data
 st.write('These are the WECS that match your parameters: ' + str(df_selected_wecs.shape[0]) + ' WECS.' )
-df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
+#df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
+wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
 
-# - Data unfiltered (hidden in a button)
-''
-'📍 You can also check the full database here:'
-if st.checkbox('Show  unfiltered WECS list'):
-	df
-
-
-st.write('---')
+'---'
 
 # - Plotting the data
 '### Plotting the results'
-'Coming soon...'
 
-grades = [83,95,91,87,70,0,85,82,100,67,73,77,0]
-decile = lambda grade: grade // 10 * 10
-histogram = Counter(decile(grade) for grade in grades)
-#plt.bar([x - 4 for x in histogram.keys()], # shift each bar to the left by 4
-#histogram.values(), # give each bar its correct height
-#plt.axis([-5, 105, 0, 5]) # x-axis from -5 to 105,
-# y-axis from 0 to 5
-#plt.xticks([10 * i for i in range(11)]) # x-axis labels at 0, 10, ..., 100
-#plt.xlabel("Decile")
-#plt.ylabel("# of Students")
-#plt.title("Distribution of Exam 1 Grades")
-#st.area_chart(grades)
-#plt.show() 
+
+st.write('---')
+# - Data unfiltered (hidden in a button)
+''
+':paperclip: You can also check the full database here:'
+if st.checkbox('Show  unfiltered WECS list'):
+	df
+
+if st.button('Download data'):
+    st.write('...downloading data...')
+else:
+    st.write('')
+
+st.write('---')
