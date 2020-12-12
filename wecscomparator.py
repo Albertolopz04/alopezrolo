@@ -2,13 +2,15 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-#from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 
-from collections import Counter
-
+# - Setting web configuration
+st.set_page_config(
+    page_title="Wecs Comparator v2",
+    page_icon=':cyclone:',    
+    initial_sidebar_state="expanded",)
 
 # - Heading
-
 st.title('🔎 WECS Comparator v.2')
 st.write("""
 In this website you can *explore* the **wind turbine** that best suits your needs.
@@ -23,22 +25,26 @@ In this website you can *explore* the **wind turbine** that best suits your need
 '* Power and performance (cp) curve'
 ' '
 
-
+# - Loading the data
+st.cache()
+wecs = pd.read_excel('300_wecsdata.xlsx')
 
 # - Selecting the parameters
 st.write("""	### Select the rated power	""")
 rated_power_selected = st.slider('Rated Power (kW)', 0, 10000,2500,500 )
 'You selected a ', rated_power_selected/1000, 'MW WECS'
 
-# Definir intervalo del rated power
+# 1.Definir intervalo del rated power
 interval = 501
 rated_power_min = rated_power_selected - interval
 rated_power_max = rated_power_selected + interval
 'The app will show you WECS between ', rated_power_min + 1, ' and ', rated_power_max - 1, 'kW'
 
+# 2.Seleccionar el tipo
 st.write("""	### Select the type of generator	""")
 type_selected=st.multiselect('Type', ['1','2','3','4'],['1','2','3','4'])
 
+# 3.Seleccionar Onshore/Offshore
 st.write("""	### Select whether the WECS is designed for Onshore/Offshore	""")
 offshore_selected = st.selectbox('Onshore/Offshore',
 	['Onshore', 'Offshore'])
