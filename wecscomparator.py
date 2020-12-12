@@ -83,20 +83,18 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		wecsP=wecs.iloc[(w+1),9:(9+90)]
 
 		# Plotting the power curve of the wecs
-		st.pyplot(wecsP.draw())
-		
-		fig, ax = plt.subplots()
-		ax.plot(wecsV,wecsP)
-		ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',
+		#fig, ax = plt.subplots()
+		#ax.plot(wecsV,wecsP)
+		#ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',
 		       title=wecs.iloc[w,3])
-		ax.grid()
-		plt.show()
-		st.pyplot(fig=fig)
+		#ax.grid()
+		#plt.show()
+		#st.pyplot(fig=fig)
 
-		plt.scatter(wecsV,wecsP)
-		plt.xlabel("copy")
-		plt.ylabel("paste")
-		st.pyplot(fig)
+		#plt.scatter(wecsV,wecsP)
+		#plt.xlabel("copy")
+		#plt.ylabel("paste")
+		#st.pyplot(fig)
 
 		wecs.iloc[w,1:9]
 ''
