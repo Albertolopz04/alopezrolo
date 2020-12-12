@@ -71,6 +71,32 @@ wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 # - Plotting the data
 '### Plotting the results'
 
+if st.checkbox('Show the Power Curve of each WECS'):
+	for i in range(wecs_selected.shape[0]):
+		st.write(str(i+1),'/',str(df_selected_wecs.shape[0]),'   -   ',wecs_selected.iloc[i,3])
+		#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
+		w = wecs_selected.iloc[i,1]
+		w = w*2 - 2
+		
+		# Store the wind and power data of the wecs in two variables
+		wecsV=wecs.iloc[w,9:(9+90)]
+		wecsP=wecs.iloc[(w+1),9:(9+90)]
+
+		# Plotting the power curve of the wecs
+		fig, ax = plt.subplots()
+		ax.plot(wecsV,wecsP)
+		ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',
+		       title=wecs.iloc[w,3])
+		ax.grid()
+		plt.show()
+		st.pyplot(fig=fig)
+
+		plt.scatter(wecsV,wecsP)
+		plt.xlabel("copy")
+		plt.ylabel("paste")
+		st.pyplot(fig)
+
+		wecs.iloc[w,0:7]
 ''
 st.write('---')
 # - Download all the data
