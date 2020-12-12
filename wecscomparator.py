@@ -26,7 +26,7 @@ In this website you can *explore* the **wind turbine** that best suits your need
 ' '
 
 # - Loading the data
-st.cache()
+#st.cache()
 wecs = pd.read_csv('300_wecsdata.xlsx', delimiter=';', error_bad_lines=False, encoding='latin-1')
 
 # - Selecting the parameters
