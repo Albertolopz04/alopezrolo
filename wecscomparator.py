@@ -64,7 +64,7 @@ wecs_selected = wecs[(wecs['datavp']==('v')) & (wecs['power'].between(rated_powe
 # - Displaying the data
 st.write('These are the WECS that match your parameters: ' + str(wecs_selected.shape[0]) + ' WECS.' )
 #df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
-wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
+wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 
 '---'
 
