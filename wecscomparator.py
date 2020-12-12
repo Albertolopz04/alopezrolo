@@ -95,7 +95,7 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		#plt.ylabel("paste")
 		#st.pyplot(fig)
 
-		wecs.iloc[w,1:9]
+		st.table(wecs.iloc[w,1:9])
 ''
 st.write('---')
 # - Download all the data
