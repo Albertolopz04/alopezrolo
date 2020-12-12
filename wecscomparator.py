@@ -70,7 +70,7 @@ wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 
 # - Plotting the data
 '### Plotting the results'
-import plotly.tools as tls
+import plotly
 
 if st.checkbox('Show the Power Curve of each WECS'):
 	for i in range(wecs_selected.shape[0]):
