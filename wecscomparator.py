@@ -71,18 +71,16 @@ wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 # - Plotting the data
 '### Plotting the results'
 
-
-
+''
+st.write('---')
 # - Download all the data
 '### Get all the data 📥'
-st.write('---')
 # - Data unfiltered (hidden in a button)
-''
 ':paperclip: You can also check the full database here:'
 if st.checkbox('Show  unfiltered WECS list'):
 	wecs
 
-':down: Or download the full database:'
+'⬇️ Or download the full database:'
 if st.button('Download data'):
     st.write('...downloading data...')
 else:
