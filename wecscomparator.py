@@ -46,12 +46,9 @@ type_selected=st.multiselect('Type', ['1','2','3','4'],['1','2','3','4'])
 
 # 3.Seleccionar Onshore/Offshore
 st.write("""	### Select whether the WECS is designed for Onshore/Offshore	""")
-offshore_selected = st.selectbox('Onshore/Offshore',
-	['Onshore', 'Offshore'])
-
-#offshore_selected=st.multiselect('Offshore?', ['Onshore','Offshore'],['Onshore'])
-
-of = offshore_selected
+#offshore_selected = st.selectbox('Onshore/Offshore',['Onshore', 'Offshore'])
+shore = st.radio("",('Onshore','Offshore'))
+of = shore
 if of == 'Offshore':
 	of = 1
 elif of == 'Onshore':
