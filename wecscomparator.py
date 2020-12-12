@@ -60,11 +60,9 @@ elif of == 'Onshore':
 
 # Filterig data
 wecs_selected = wecs[(wecs['datavp']==('v')) & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
-#
-#wecs[(wecs["offshore?"]==of)]
 
 # - Displaying the data
-st.write('These are the WECS that match your parameters: ' + str(selected_wecs.shape[0]) + ' WECS.' )
+st.write('These are the WECS that match your parameters: ' + str(wecs_selected.shape[0]) + ' WECS.' )
 #df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
 wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
 
