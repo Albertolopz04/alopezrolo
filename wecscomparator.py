@@ -79,6 +79,7 @@ st.write('---')
 ':paperclip: You can also check the full database here:'
 if st.checkbox('Show  unfiltered WECS list'):
 	wecs
+''
 
 '⬇️ Or download the full database:'
 if st.button('Download data'):
