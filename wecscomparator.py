@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 #import matplotlib.pyplot as plt
+import plotly.tools as tls
 
 # - Setting web configuration
 st.set_page_config(
@@ -83,6 +84,8 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		wecsP=wecs.iloc[(w+1),9:(9+90)]
 
 		# Plotting the power curve of the wecs
+		st.pyplot(wecsP.draw())
+		
 		fig, ax = plt.subplots()
 		ax.plot(wecsV,wecsP)
 		ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',
