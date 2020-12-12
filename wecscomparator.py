@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 #import matplotlib.pyplot as plt
-import plotly.tools as tls
 
 # - Setting web configuration
 st.set_page_config(
@@ -71,6 +70,7 @@ wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 
 # - Plotting the data
 '### Plotting the results'
+import plotly.tools as tls
 
 if st.checkbox('Show the Power Curve of each WECS'):
 	for i in range(wecs_selected.shape[0]):
