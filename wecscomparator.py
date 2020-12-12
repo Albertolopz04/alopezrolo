@@ -72,6 +72,9 @@ wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 '### Plotting the results'
 
 
+
+# - Download all the data
+'### Get all the data 📥'
 st.write('---')
 # - Data unfiltered (hidden in a button)
 ''
