@@ -85,8 +85,7 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		# Plotting the power curve of the wecs
 		#fig, ax = plt.subplots()
 		#ax.plot(wecsV,wecsP)
-		#ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',
-		       title=wecs.iloc[w,3])
+		#ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',title=wecs.iloc[w,3])
 		#ax.grid()
 		#plt.show()
 		#st.pyplot(fig=fig)
