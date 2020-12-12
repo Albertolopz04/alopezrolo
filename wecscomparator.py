@@ -64,7 +64,7 @@ wecs_selected = wecs[(wecs['datavp']==('v')) & (wecs['power'].between(rated_powe
 # - Displaying the data
 st.write('These are the WECS that match your parameters: ' + str(wecs_selected.shape[0]) + ' WECS.' )
 #df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
-st.table(wecs_selected.loc[:,['name','power','bladediameter','type','web']])
+st.dataframe(wecs_selected.loc[:,['name','power','bladediameter','type','web']])
 
 '---'
 
@@ -103,7 +103,7 @@ st.write('---')
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can also check the full database here:'
 if st.checkbox('Show  unfiltered WECS list'):
-	wecs[(wecs.data=='v')].iloc[:,1:9]
+	st.dataframe(wecs[(wecs.data=='v')].iloc[:,1:9])
 ''
 
 '⬇️ Or download the full database:'
