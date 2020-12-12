@@ -65,7 +65,7 @@ elif of == 'Onshore':
 #df_selected_wecs = df[(df.Type.isin(type_selected)) & (df.RatedPower == rated_power_selected) & (df["Offshore?"]==of)]
 #wecs_selected = wecs[ (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 #(wecs['datavp']==('v')) &
-wecs_selected = wecs[(wecs["offshore?"]==of)]
+wecs[(wecs["offshore?"]==of)]
 
 # - Displaying the data
 st.write('These are the WECS that match your parameters: ' + str(df_selected_wecs.shape[0]) + ' WECS.' )
