@@ -73,7 +73,7 @@ wecs_selected.loc[:,['name','power','bladediameter','type','web']]
 
 if st.checkbox('Show the Power Curve of each WECS'):
 	for i in range(wecs_selected.shape[0]):
-		st.write(str(i+1),'/',str(df_selected_wecs.shape[0]),'   -   ',wecs_selected.iloc[i,3])
+		st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
 		#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
 		w = wecs_selected.iloc[i,1]
 		w = w*2 - 2
