@@ -27,7 +27,7 @@ In this website you can *explore* the **wind turbine** that best suits your need
 
 # - Loading the data
 st.cache()
-wecs = pd.read_csv('300_wecsdata.csv',  error_bad_lines=False, encoding='latin-1')
+wecs = pd.read_csv('300_wecsdata.csv', delimiter=';',  error_bad_lines=False, encoding='latin-1')
 
 # - Selecting the parameters
 st.write("""	### Select the rated power	""")
