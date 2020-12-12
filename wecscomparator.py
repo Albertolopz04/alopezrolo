@@ -96,7 +96,7 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		plt.ylabel("paste")
 		st.pyplot(fig)
 
-		wecs.iloc[w,0:7]
+		wecs.iloc[w,0:9]
 ''
 st.write('---')
 # - Download all the data
@@ -104,7 +104,7 @@ st.write('---')
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can also check the full database here:'
 if st.checkbox('Show  unfiltered WECS list'):
-	wecs
+	wecs[(wecs.data=='v')].iloc[:,0:9]
 ''
 
 '⬇️ Or download the full database:'
