@@ -97,55 +97,94 @@ else:
 
 # - Plotting the data
 '### Plotting the results'
-
-# 1. Select the WECS that is going to be plotted
-wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected['name'].tolist())
-# Find the wecsID of the selected WECS
-w = wecs_selected[wecs_selected['name']==wecs_plotted].iloc[0,1]
-# Find it in the dataframe
-w = w*2 - 2
-
-# Store the wind and power data of the wecs in two variables
-wecsV=wecs.iloc[w,9:(9+90)]
-wecsP=wecs.iloc[(w+1),9:(9+90)]
-
-# Plotting the power curve of the wecs
-fig, ax = plt.subplots()
-ax.plot(wecsV,wecsP)
-ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
-ax.grid()
-plt.show()
-st.pyplot(fig=fig)
-
-# Giving additional information of the WECS
-st.write('Database references:')
-st.table(wecs.iloc[w,1:9])
-
-'---'
-
-# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
-if st.checkbox('Show the all the Power Curve of each WECS'):
+wecsSeries = pd.DataFrame()
+legend = []
+'You should only check this once you have narrowed down the search to a handful number of WECS.'
+'Otherwise, the app will be slowed down.'
+if st.checkbox('Show the power curve of the results'):
+	'#### Graph of all the WECS that meet the user criteria'
+	fig, ax = plt.subplots()
 	for i in range(wecs_selected.shape[0]):
-		st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
-		#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
 		w = wecs_selected.iloc[i,1]
 		w = w*2 - 2
 		
 		# Store the wind and power data of the wecs in two variables
 		wecsV=wecs.iloc[w,9:(9+90)]
 		wecsP=wecs.iloc[(w+1),9:(9+90)]
+		wecsSeries = pd.concat([wecsSeries,wecsV,wecsP], axis = 1)
+		a = int(2*i+1)
+		b = int(2*i)
+		ax.plot(wecsSeries.iloc[:,b],wecsSeries.iloc[:,a])
+		legend.append(wecs_selected.iloc[i,3])
+		
 
-		# Plotting the power curve of the wecs
-		fig, ax = plt.subplots()
-		ax.plot(wecsV,wecsP)
-		ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
-		ax.grid()
-		plt.show()
-		st.pyplot(fig=fig)
 
-		# Giving additional information of the WECS
+	ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title='WECS Comparator')
+	ax.grid()
+	plt.legend(legend)
+	#plt.legend(wecs_selected.iloc[i,3].tolist())
+	plt.show()
+	st.pyplot(fig=fig)
+
+
+
+	'#### Individual WECS power curve'
+	# 1. Select the WECS that is going to be plotted
+	wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected['name'].tolist())
+	# Find the wecsID of the selected WECS
+	w = wecs_selected[wecs_selected['name']==wecs_plotted].iloc[0,1]
+	# Find it in the dataframe
+	w = w*2 - 2
+
+	# Store the wind and power data of the wecs in two variables
+	wecsV=wecs.iloc[w,9:(9+90)]
+	wecsP=wecs.iloc[(w+1),9:(9+90)]
+
+	# Plotting the power curve of the wecs
+	fig, ax = plt.subplots()
+	ax.plot(wecsV,wecsP)
+	ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
+	ax.grid()
+	plt.show()
+	st.pyplot(fig=fig)
+
+	# Giving additional information of the WECS
+	if st.checkbox('Show details'):
 		st.write('Database references:')
 		st.table(wecs.iloc[w,1:9])
+
+	wecsSeries = pd.concat([wecsV,wecsP], axis = 1)
+	'---'
+
+	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
+	'#### Power curve of all the WECS found'
+	''
+	if st.checkbox('Show the all the Power Curve of each WECS'):
+		for i in range(wecs_selected.shape[0]):
+			st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
+			#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
+			w = wecs_selected.iloc[i,1]
+			w = w*2 - 2
+			
+			# Store the wind and power data of the wecs in two variables
+			wecsV=wecs.iloc[w,9:(9+90)]
+			wecsP=wecs.iloc[(w+1),9:(9+90)]
+			wecsSeries = pd.concat([wecsSeries,wecsV,wecsP], axis = 1)
+			
+
+			# Plotting the power curve of the wecs
+			fig, ax = plt.subplots()
+			ax.plot(wecsV,wecsP)
+			ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
+			ax.grid()
+			plt.show()
+			st.pyplot(fig=fig)
+
+			# Giving additional information of the WECS
+			st.write('Database references:')
+			st.table(wecs.iloc[w,1:9])
+
+
 
 
 ''
