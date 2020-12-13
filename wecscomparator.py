@@ -26,7 +26,7 @@ In this webapp you can *find* the **wind turbine** that best suits your needs.
 '* Website of the manufacturer'
 '* Power and performance (cp) curve'
 ' '
-
+'---'
 # - Loading the data
 st.cache()
 wecs = pd.read_csv('300_wecsdata.csv', delimiter=';',  error_bad_lines=False, encoding='latin-1')
