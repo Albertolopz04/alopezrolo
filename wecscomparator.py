@@ -56,7 +56,13 @@ elif of == 'Onshore':
 ''
 ''
 # 4.Seleccionar el fabricante
-st.write("""	### Filter a specific manufacturer	""")
+st.write("""	### Filter by manufacturer	""")
+st.write('This is optional, if you don\'t want to filter by manufacturer select All')
+
+manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
+brand = manufacturer['manufacturerName'].tolist()
+brand.insert(0,"All")
+manufacturer_selected = st.selectbox('Choose the manufacturer', brand)
 
 
 '### Results 📊'
