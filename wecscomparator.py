@@ -67,7 +67,7 @@ if st.checkbox('Select manufacturer'):
 	manufacturer_selected = st.selectbox('Choose the manufacturer', brand)
 
 	manufacturer_selected
-	manufacturer['manufacturerName']
+	manufacturer[1,'manufacturerName']
 	if manufacturer_selected == 'All':
 		'Do nothing'
 	elif manufacturer_selected == 'Acciona':
