@@ -55,6 +55,9 @@ elif of == 'Onshore':
 	of = 0
 ''
 ''
+# 4.Seleccionar el fabricante
+st.write("""	### Filter a specific manufacturer	""")
+st.
 
 '### Results 📊'
 
@@ -62,10 +65,14 @@ elif of == 'Onshore':
 wecs_selected = wecs[(wecs['datavp']==('v')) & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
 # - Displaying the data
-st.success(str(wecs_selected.shape[0]) + ' WECS meet your criteria.')
-st.write('These are the WECS that match your parameters: ')
-#df_selected_wecs.loc[:,['Names','RatedPower','Rotor Diameter','Type']]
-st.dataframe(wecs_selected.loc[:,['name','power','bladediameter','type','web']])
+if (wecs_selected.shape[0]) == 0:
+	st.error('There are no WECS that match your criteria')
+	st.write('Modify the parameters that you have selected.')
+else:
+	st.success(str(wecs_selected.shape[0]) + ' WECS meet your criteria.')
+	st.write('These are the WECS that match your parameters: ')
+	wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
+
 
 '---'
 
@@ -101,7 +108,7 @@ st.write('---')
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can also check the full database here:'
 if st.checkbox('Show  unfiltered WECS list'):
-	st.dataframe(wecs[(wecs.data=='v')].iloc[:,1:9])
+	st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
 ''
 
 '⬇️ Or download the full database:'
