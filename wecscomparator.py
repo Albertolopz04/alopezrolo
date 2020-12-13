@@ -68,6 +68,7 @@ if st.checkbox('Select manufacturer'):
 
 	if manufacturer_selected == 'All':
 		#manufacturer_selected.any()
+		''
 	elif manufacturer_selected == 'Acciona':
 		manufacturer_selected = 1
 	else:
