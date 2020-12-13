@@ -108,7 +108,7 @@ st.write('---')
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can also check the full database here:'
 if st.checkbox('Show  unfiltered WECS list'):
-	st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
+	#st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
 ''
 
 '⬇️ Or download the full database:'
