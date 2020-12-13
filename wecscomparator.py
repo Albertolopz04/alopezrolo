@@ -92,10 +92,35 @@ else:
 
 '---'
 
+
 # - Plotting the data
 '### Plotting the results'
 
-if st.checkbox('Show the Power Curve of each WECS'):
+# 1. Select the WECS that is going to be plotted
+wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected['name'].tolist())
+# Find the wecsID of the selected WECS
+w = wecs_selected[wecs_selected['name']==wecs_plotted].iloc[0,1]
+# Find it in the dataframe
+w = w*2 - 2
+
+# Store the wind and power data of the wecs in two variables
+wecsV=wecs.iloc[w,9:(9+90)]
+wecsP=wecs.iloc[(w+1),9:(9+90)]
+
+# Plotting the power curve of the wecs
+fig, ax = plt.subplots()
+ax.plot(wecsV,wecsP)
+ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
+ax.grid()
+plt.show()
+st.pyplot(fig=fig)
+
+# Giving additional information of the WECS
+st.write('Database references:')
+st.table(wecs.iloc[w,1:9])
+
+# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
+if st.checkbox('Show the all the Power Curve of each WECS'):
 	for i in range(wecs_selected.shape[0]):
 		st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
 		#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
@@ -109,14 +134,16 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		# Plotting the power curve of the wecs
 		fig, ax = plt.subplots()
 		ax.plot(wecsV,wecsP)
-		ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)',title=wecs.iloc[w,3])
+		ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
 		ax.grid()
 		plt.show()
 		st.pyplot(fig=fig)
-		
-		st.write('Database references:')
 
+		# Giving additional information of the WECS
+		st.write('Database references:')
 		st.table(wecs.iloc[w,1:9])
+
+
 ''
 st.write('---')
 # - Download all the data
