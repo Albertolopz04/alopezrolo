@@ -6,22 +6,24 @@ import matplotlib.pyplot as plt
 
 # - Setting web configuration
 st.set_page_config(
-    page_title="Wecs Comparator v2",
+    page_title="Wecs Easy Choice v.2",
     page_icon=':cyclone:',    
     initial_sidebar_state="expanded",)
 
 # - Heading
-st.title('🔎 WECS Comparator v.2')
+st.title('🔎 WECS Easy Choice v.2')
 st.write("""
-In this website you can *explore* the **wind turbine** that best suits your needs.
+In this webapp you can *find* the **wind turbine** that best suits your needs.
 """	)
 
-'This project is a webapp able to provide a list of candidate wind turbines (WECS) to the user once he has decided what he is looking for. The user is able to observe and compare freely any turbine of the library whenever he wants. Once the WECS are filtered the following values will be displayed'
+'This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
+'Once the WECS are filtered the following values will be displayed'
 '* Manufacturer name'
 '* Nominal Power'
 '* Type'
 '* Blades Diameter'
 '* Onshore/Offshore'
+'* Website of the manufacturer'
 '* Power and performance (cp) curve'
 ' '
 
