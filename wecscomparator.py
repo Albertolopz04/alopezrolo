@@ -60,7 +60,7 @@ elif of == 'Onshore':
 manufacturer_selected = 'All'
 if st.checkbox('Select manufacturer'):
 	st.write("""	### Filter by manufacturer	""")
-	st.write('This is optional, if you don\'t want to filter by manufacturer choose All or deselect the checkbox')
+	st.write('This is optional, if you don\'t want to filter by manufacturer deselect the checkbox')
 	# Convert the csv file into a list to display it on the select box
 	manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
 	brand = manufacturer['manufacturerName'].tolist()
