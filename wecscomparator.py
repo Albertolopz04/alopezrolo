@@ -56,7 +56,6 @@ if of == 'Offshore':
 elif of == 'Onshore':
 	of = 0
 ''
-''
 # 4.Seleccionar el fabricante
 manufacturer_selected = 'All'
 if st.checkbox('Select manufacturer'):
@@ -65,22 +64,26 @@ if st.checkbox('Select manufacturer'):
 	# Convert the csv file into a list to display it on the select box
 	manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
 	brand = manufacturer['manufacturerName'].tolist()
-	brand.insert(0,"All")
-	manufacturer_selected = st.selectbox('Choose the manufacturer', brand)
+	manufacturer_selected = st.selectbox('Choose the manufacturer', brand,)
 
 	if manufacturer_selected == 'All':
-		#manufacturer_selected.any()
-		''
+		manufacturer_selected = 0
 	elif manufacturer_selected == 'Acciona':
 		manufacturer_selected = 1
 	else:
-		manufacturer_selected = manufacturer
+		manufacturer_selected = manufacturer[manufacturer['manufacturerName']==manufacturer_selected].iloc[0,0]
 
 
-'### Results 📊'
+'## Results 📊'
 
+# - Loading the data
+df = pd.read_csv('99_wecs_data.csv', delimiter=';', error_bad_lines=False, encoding='latin-1')
 # Filterig data
-wecs_selected = wecs[(wecs['datavp']==('v')) & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+if manufacturer_selected != 'All':
+	wecs_selected = wecs[(wecs.brandID==manufacturer_selected) & (wecs.data=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+else:
+	wecs_selected = wecs[(wecs.data=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+
 
 # - Displaying the data
 if (wecs_selected.shape[0]) == 0:
@@ -90,7 +93,7 @@ else:
 	st.success(str(wecs_selected.shape[0]) + ' WECS meet your criteria.')
 	st.write('These are the WECS that match your parameters: ')
 	wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
-
+	
 
 '---'
 
