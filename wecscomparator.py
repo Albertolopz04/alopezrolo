@@ -121,6 +121,8 @@ st.pyplot(fig=fig)
 st.write('Database references:')
 st.table(wecs.iloc[w,1:9])
 
+'---'
+
 # 2. Allow the user to see the plot of all the WECS that meet the user criteria.
 if st.checkbox('Show the all the Power Curve of each WECS'):
 	for i in range(wecs_selected.shape[0]):
