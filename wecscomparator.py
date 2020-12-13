@@ -43,7 +43,7 @@ rated_power_max = rated_power_selected + interval
 'The app will show you WECS between ', rated_power_min + 1, ' and ', rated_power_max - 1, 'kW'
 
 # 2.Seleccionar el tipo
-st.write("""	### Select the type of generator	""")
+st.write("""	### Select the type of of wind turbine	""")
 """
 	If you dont know what this mean check this [article](https://solarfeeds.com/types-of-wind-turbine-generators-and-their-functions/)
 
