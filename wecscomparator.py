@@ -103,8 +103,7 @@ else:
 '### Plotting the results'
 wecsSeries = pd.DataFrame()
 legend = []
-'You should only check this once you have narrowed down the search to a handful number of WECS.'
-'Otherwise, the app will be slowed down.'
+st.warning('You should only check this once you have narrowed down the search to a handful number of WECS.\n Otherwise, the app will be slowed down.')
 if st.checkbox('Show the power curve of the results'):
 	'#### Graph of all the WECS that meet the user criteria'
 	fig, ax = plt.subplots()
