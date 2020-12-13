@@ -45,9 +45,9 @@ rated_power_max = rated_power_selected + interval
 # 2.Seleccionar el tipo
 st.write("""	### Select the type of of wind turbine	""")
 """
-	
+If you dont know what this mean check this [article](https://solarfeeds.com/types-of-wind-turbine-generators-and-their-functions/	
 """
-type_selected=st.multiselect('Type. If you dont know what this mean check this [article](https://solarfeeds.com/types-of-wind-turbine-generators-and-their-functions/)
+type_selected=st.multiselect('Type.)
 ', ['1','2','3','4'],['1','2','3','4'])
 
 # 3.Seleccionar Onshore/Offshore
