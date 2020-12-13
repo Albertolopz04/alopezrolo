@@ -90,11 +90,8 @@ if st.checkbox('Show the Power Curve of each WECS'):
 		ax.grid()
 		plt.show()
 		st.pyplot(fig=fig)
-
-		plt.scatter(wecsV,wecsP)
-		plt.xlabel("copy")
-		plt.ylabel("paste")
-		st.pyplot(fig)
+		
+		st.write('Database references:')
 
 		st.table(wecs.iloc[w,1:9])
 ''
