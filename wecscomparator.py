@@ -80,9 +80,9 @@ if st.checkbox('Select manufacturer'):
 df = pd.read_csv('99_wecs_data.csv', delimiter=';', error_bad_lines=False, encoding='latin-1')
 # Filterig data
 if manufacturer_selected != 'All':
-	wecs_selected = wecs[(wecs.brandID==manufacturer_selected) & (wecs.data=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+	wecs_selected = wecs[(wecs.brandID==manufacturer_selected) & (wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 else:
-	wecs_selected = wecs[(wecs.data=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+	wecs_selected = wecs[(wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
 
 # - Displaying the data
