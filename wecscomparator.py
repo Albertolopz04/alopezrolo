@@ -64,9 +64,10 @@ if st.checkbox('Select manufacturer'):
 	# Convert the csv file into a list to display it on the select box
 	manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
 	brand = manufacturer['manufacturerName'].tolist()
-	manufacturer_selected = st.selectbox('Choose the manufacturer', brand,)
+	brand.append(' ')
+	manufacturer_selected = st.selectbox('Choose the manufacturer', brand,58)
 
-	if manufacturer_selected == 'All':
+	if manufacturer_selected == ' ':
 		manufacturer_selected = 0
 	elif manufacturer_selected == 'Acciona':
 		manufacturer_selected = 1
