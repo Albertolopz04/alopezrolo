@@ -56,13 +56,24 @@ elif of == 'Onshore':
 ''
 ''
 # 4.Seleccionar el fabricante
-st.write("""	### Filter by manufacturer	""")
-st.write('This is optional, if you don\'t want to filter by manufacturer select All')
+manufacturer_selected = 'All'
+if st.checkbox('Select manufacturer'):
+	st.write("""	### Filter by manufacturer	""")
+	st.write('This is optional, if you don\'t want to filter by manufacturer choose All or deselect the checkbox')
+	# Convert the csv file into a list to display it on the select box
+	manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
+	brand = manufacturer['manufacturerName'].tolist()
+	brand.insert(0,"All")
+	manufacturer_selected = st.selectbox('Choose the manufacturer', brand)
 
-manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
-brand = manufacturer['manufacturerName'].tolist()
-brand.insert(0,"All")
-manufacturer_selected = st.selectbox('Choose the manufacturer', brand)
+	manufacturer_selected
+	manufacturer['manufacturerName']
+	if manufacturer_selected == 'All':
+		'Do nothing'
+	elif manufacturer_selected == 'Acciona':
+		manufacturer_selected = 1
+	else:
+		manufacturer_selected = manufacturer
 
 
 '### Results 📊'
