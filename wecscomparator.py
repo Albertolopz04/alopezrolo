@@ -202,7 +202,7 @@ if st.checkbox('Show  unfiltered WECS list'):
 
 '⬇️ Or download the full database:'
 if st.button('Download data'):
-    st.write('...downloading data...')
+    st.write('Not yet available. Coming soon...')
 else:
     st.write('')
 
