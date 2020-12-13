@@ -47,8 +47,7 @@ st.write("""	### Select the type of of wind turbine	""")
 """
 If you dont know what this mean check this [article](https://solarfeeds.com/types-of-wind-turbine-generators-and-their-functions/	
 """
-type_selected=st.multiselect('Type.)
-', ['1','2','3','4'],['1','2','3','4'])
+type_selected=st.multiselect('Type', ['1','2','3','4'],['1','2','3','4'])
 
 # 3.Seleccionar Onshore/Offshore
 st.write("""	### Select whether the WECS is designed for Onshore/Offshore	""")
