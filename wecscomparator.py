@@ -128,7 +128,7 @@ if st.checkbox('Show the power curve of the results'):
 
 
 
-	'#### Individual WECS power curve'
+	'#### Individual WECS Power Curve'
 	# 1. Select the WECS that is going to be plotted
 	wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected['name'].tolist())
 	# Find the wecsID of the selected WECS
@@ -149,7 +149,7 @@ if st.checkbox('Show the power curve of the results'):
 	st.pyplot(fig=fig)
 
 	# Giving additional information of the WECS
-	if st.checkbox('Show details'):
+	if st.checkbox('Show more details'):
 		st.write('Database references:')
 		st.table(wecs.iloc[w,1:9])
 
@@ -159,7 +159,7 @@ if st.checkbox('Show the power curve of the results'):
 	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
 	'#### Power curve of all the WECS found'
 	''
-	if st.checkbox('Show the all the Power Curve of each WECS'):
+	if st.checkbox('Display all the power curves individually'):
 		for i in range(wecs_selected.shape[0]):
 			st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
 			#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
@@ -193,10 +193,10 @@ st.write('---')
 '### Get all the data 📥'
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can also check the full database here:'
-if st.checkbox('Show  unfiltered WECS list'):
+if st.checkbox('Show complete WECS list unfiltered'):
 	st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
 ''
-
+''
 '⬇️ Or download the full database:'
 if st.button('Download data'):
     st.write('Not yet available. Coming soon...')
