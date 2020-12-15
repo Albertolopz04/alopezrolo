@@ -93,8 +93,7 @@ else:
 	wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
 	
 
-'---'
-
+''
 
 # - Plotting the data
 '### Plotting the results'
