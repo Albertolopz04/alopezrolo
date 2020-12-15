@@ -100,7 +100,8 @@ else:
 '### Plotting the results'
 wecsSeries = pd.DataFrame()
 legend = []
-st.info('Check once you have narrowed down the search to a handful of WECS.')
+if wecs_selected.shape[0] > 10:
+	st.info('Check once you have narrowed down the search to a handful of WECS.')
 if st.checkbox('Show the power curve of the results'):
 	'#### Graph of all the WECS that meet the user criteria'
 	fig, ax = plt.subplots()
