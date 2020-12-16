@@ -263,9 +263,9 @@ if st.checkbox('Show the power curve of the results'):
 			st.pyplot(fig=fig)
 
 			# Giving additional information of the WECS
-			st.write('Database references:')
-			st.table(wecs.iloc[w,1:9])
-
+			if st.checkbox('Show more details'):
+				st.write('Database references:')
+				st.table(wecs.iloc[w,1:9])
 
 
 
@@ -284,6 +284,5 @@ if st.button('Download data'):
 	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Complete Excel'), unsafe_allow_html=True)
 else:
     st.write('')
-
 
 st.write('---')
