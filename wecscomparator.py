@@ -102,8 +102,14 @@ else:
 	st.success(str(wecs_selected.shape[0]) + ' WECS meet your criteria.')
 	st.write('These are the WECS that match your parameters: ')
 	wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
-	
 
+# - Download excel function	
+def get_binary_file_downloader_html(bin_file, file_label='File'):
+		with open(bin_file, 'rb') as f:
+			data = f.read()
+			bin_str = base64.b64encode(data).decode()
+			href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+		return href
 ''
 
 # - Plotting the data
@@ -178,6 +184,8 @@ if st.checkbox('Show the power curve of the results'):
 	plt.show()
 	st.pyplot(fig=fig)
 	
+	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'WECS data sheet'), unsafe_allow_html=True)
+	
 	# Giving additional information of the WECS
 	if st.checkbox('Show more details'):
 		st.write('Database references:')
@@ -248,13 +256,7 @@ if st.checkbox('Show complete WECS list unfiltered'):
 ''
 '⬇️ Or download the full database:'
 if st.button('Download data'):
-	def get_binary_file_downloader_html(bin_file, file_label='File'):
-		with open(bin_file, 'rb') as f:
-			data = f.read()
-			bin_str = base64.b64encode(data).decode()
-			href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
-		return href
-	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Excel'), unsafe_allow_html=True)
+	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Complete Excel'), unsafe_allow_html=True)
 else:
     st.write('')
 
