@@ -202,7 +202,7 @@ if st.checkbox('Show the power curve of the results'):
 	    # some strings <-> bytes conversions necessary here
 	    b64 = base64.b64encode(object_to_download.encode()).decode()
 
-	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Dwonlod data sheet as csv"></a>'
+	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Download data-sheet as csv"></a>'
 
 	# Download button
 	tmp_download_link = download_link(result_wecs, wecs.iloc[w,3] + '.csv', wecs.iloc[w,3])
@@ -212,7 +212,7 @@ if st.checkbox('Show the power curve of the results'):
 	if st.checkbox('Show more details'):
 		st.write('Database references:')
 		st.table(wecs.iloc[w,1:9])
-	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'WECS data sheet'), unsafe_allow_html=True)
+	
 	wecsSeries = pd.concat([wecsV,wecsP], axis = 1)
 	'---'
 
