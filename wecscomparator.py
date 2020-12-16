@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import base64
+import os
 
 # - Setting web configuration
 st.set_page_config(
