@@ -82,6 +82,15 @@ if manufacturer_selected != ' ':
 else:
 	wecs_selected = wecs[(wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
+	# Calculating the perfomrance coefficient
+P = 1500000      				# Power in Watts [w]
+rho = 1.225   					# Air density [kg/km3]
+v = 10        					# Wind velocity [m/s]
+D = 90        					# Blades diameter [m]
+Ba = (3.14/4) * (90)*(90) 			# Blades cross-section-area [m2]
+
+cp = (2*P)/(rho * Ba * v*v*v) 			# Performance Factor [W s3/kg m2]
+
 
 # - Displaying the data
 if (wecs_selected.shape[0]) == 0:
@@ -140,14 +149,33 @@ if st.checkbox('Show the power curve of the results'):
 	wecsV=wecs.iloc[w,9:(9+90)]
 	wecsP=wecs.iloc[(w+1),9:(9+90)]
 
+	# Calculate Cp curve of the WECS
+	v = wecsV
+	P = wecsP * 1000 
+	cp = (2*P)/(rho * Ba * v*v*v)
+
 	# Plotting the power curve of the wecs
-	fig, ax = plt.subplots()
-	ax.plot(wecsV,wecsP)
-	ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
-	ax.grid()
+	fig, ax1 = plt.subplots()
+
+	color1 = 'tab:blue'
+	ax1.set_xlabel('Wind velocity (m/s)')
+	ax1.set_ylabel('Power Output (kW)') #color = color1)
+	ax1.plot(v, wecsP, color = color1)
+	
+	ax2 = ax1.twinx() # initiate a second axes that shares the same x-axis
+
+	color2 = 'tab:red'
+	ax2.set_ylabel('Performance Factor (Cp)', color = color2)
+	ax2.plot(v, cp, color = color2)
+	ax2.tick_params(axis='y',labelcolor=color2)
+	ax2.set_ylim([0,1])
+
+	ax1.grid()
+	ax1.set(title=wecs.iloc[w,3])
+	fig.tight_layout()
 	plt.show()
 	st.pyplot(fig=fig)
-
+	
 	# Giving additional information of the WECS
 	if st.checkbox('Show more details'):
 		st.write('Database references:')
@@ -172,11 +200,30 @@ if st.checkbox('Show the power curve of the results'):
 			wecsSeries = pd.concat([wecsSeries,wecsV,wecsP], axis = 1)
 			
 
+			# Calculate Cp curve of the WECS
+			v = wecsV
+			P = wecsP * 1000 
+			cp = (2*P)/(rho * Ba * v*v*v)
+
 			# Plotting the power curve of the wecs
-			fig, ax = plt.subplots()
-			ax.plot(wecsV,wecsP)
-			ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title=wecs.iloc[w,3])
-			ax.grid()
+			fig, ax1 = plt.subplots()
+
+			color1 = 'tab:blue'
+			ax1.set_xlabel('Wind velocity (m/s)')
+			ax1.set_ylabel('Power Output (kW)') #color = color1)
+			ax1.plot(v, wecsP, color = color1)
+
+			ax2 = ax1.twinx() # initiate a second axes that shares the same x-axis
+
+			color2 = 'tab:red'
+			ax2.set_ylabel('Performance Factor (Cp)', color = color2)
+			ax2.plot(v, cp, color = color2)
+			ax2.tick_params(axis='y',labelcolor=color2)
+			ax2.set_ylim([0,1])
+
+			ax1.grid()
+			ax1.set(title=wecs.iloc[w,3])
+			fig.tight_layout()
 			plt.show()
 			st.pyplot(fig=fig)
 
