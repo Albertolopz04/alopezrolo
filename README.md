@@ -7,4 +7,3 @@ The original version was designed in matlab as a class project while I was in un
 
 The web version has been designed to make this tool more accessible and easier to use for everyone researching wind energy.
 
-The source of the data is Windographer.
