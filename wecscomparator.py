@@ -248,16 +248,15 @@ if st.checkbox('Show complete WECS list unfiltered'):
 ''
 '⬇️ Or download the full database:'
 if st.button('Download data'):
-    st.write('Not yet available. Coming soon...')
+	def get_binary_file_downloader_html(bin_file, file_label='File'):
+		with open(bin_file, 'rb') as f:
+			data = f.read()
+			bin_str = base64.b64encode(data).decode()
+			href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+		return href
+	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Excel'), unsafe_allow_html=True)
 else:
     st.write('')
-def get_binary_file_downloader_html(bin_file, file_label='File'):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    bin_str = base64.b64encode(data).decode()
-    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
-    return href
 
 
-st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Excel'), unsafe_allow_html=True)
 st.write('---')
