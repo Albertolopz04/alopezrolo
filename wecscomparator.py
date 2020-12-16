@@ -85,13 +85,15 @@ else:
 	wecs_selected = wecs[(wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
 	# Calculating the perfomrance coefficient
+# Calculating the perfomrance coefficient
 P = 1500000      				# Power in Watts [w]
 rho = 1.225   					# Air density [kg/km3]
 v = 10        					# Wind velocity [m/s]
 D = 90        					# Blades diameter [m]
-Ba = (3.14/4) * (90)*(90) 			# Blades cross-section-area [m2]
+D = 100
+Ba = (3.14/4) * (90)*(90) 		# Blades cross-section-area [m2]
 
-cp = (2*P)/(rho * Ba * v*v*v) 			# Performance Factor [W s3/kg m2]
+cp = (2*P)/(rho * Ba * v*v*v) 	# Performance Factor [W s3/kg m2]
 
 
 # - Displaying the data
@@ -124,7 +126,7 @@ if st.checkbox('Show the power curve of the results'):
 	for i in range(wecs_selected.shape[0]):
 		w = wecs_selected.iloc[i,1]
 		w = w*2 - 2
-		
+				
 		# Store the wind and power data of the wecs in two variables
 		wecsV=wecs.iloc[w,9:(9+90)]
 		wecsP=wecs.iloc[(w+1),9:(9+90)]
@@ -152,7 +154,7 @@ if st.checkbox('Show the power curve of the results'):
 	w = wecs_selected[wecs_selected['name']==wecs_plotted].iloc[0,1]
 	# Find it in the dataframe
 	w = w*2 - 2
-
+		
 	# Store the wind and power data of the wecs in two variables
 	wecsV=wecs.iloc[w,9:(9+90)]
 	wecsP=wecs.iloc[(w+1),9:(9+90)]
@@ -160,7 +162,9 @@ if st.checkbox('Show the power curve of the results'):
 	# Calculate Cp curve of the WECS
 	v = wecsV
 	P = wecsP * 1000 
-	cp = (2*P)/(rho * Ba * v*v*v)
+	D = wecs.iloc[w,5]
+	Ba = (np.pi/4) * (D)*(D) 		# Blades cross-section-area [m2]
+	cp = (2*P)/(rho * Ba * (v*v*v))
 
 	# Plotting the power curve of the wecs
 	fig, ax1 = plt.subplots()
@@ -211,7 +215,10 @@ if st.checkbox('Show the power curve of the results'):
 			# Calculate Cp curve of the WECS
 			v = wecsV
 			P = wecsP * 1000 
-			cp = (2*P)/(rho * Ba * v*v*v)
+			D = wecs.iloc[w,5]
+			Ba = (np.pi/4) * (D)*(D) 		# Blades cross-section-area [m2]
+			cp = (2*P)/(rho * Ba * (v*v*v))
+
 
 			# Plotting the power curve of the wecs
 			fig, ax1 = plt.subplots()
