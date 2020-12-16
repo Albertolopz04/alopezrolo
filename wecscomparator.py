@@ -263,7 +263,7 @@ if st.checkbox('Show the power curve of the results'):
 			st.pyplot(fig=fig)
 
 			# Giving additional information of the WECS
-			if st.checkbox('Show more details'):
+			if st.checkbox('Show details'):
 				st.write('Database references:')
 				st.table(wecs.iloc[w,1:9])
 
