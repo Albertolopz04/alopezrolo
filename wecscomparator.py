@@ -184,13 +184,11 @@ if st.checkbox('Show the power curve of the results'):
 	plt.show()
 	st.pyplot(fig=fig)
 	
-	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'WECS data sheet'), unsafe_allow_html=True)
-	
 	# Giving additional information of the WECS
 	if st.checkbox('Show more details'):
 		st.write('Database references:')
 		st.table(wecs.iloc[w,1:9])
-
+	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'WECS data sheet'), unsafe_allow_html=True)
 	wecsSeries = pd.concat([wecsV,wecsP], axis = 1)
 	'---'
 
