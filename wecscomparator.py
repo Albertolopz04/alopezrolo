@@ -147,7 +147,7 @@ if st.checkbox('Show the power curve of the results'):
 
 
 
-	'#### Individual WECS Power Curve'
+	'#### Individual WECS Power Curve and Performance Factor'
 	# 1. Select the WECS that is going to be plotted
 	wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected['name'].tolist())
 	# Find the wecsID of the selected WECS
@@ -187,6 +187,26 @@ if st.checkbox('Show the power curve of the results'):
 	fig.tight_layout()
 	plt.show()
 	st.pyplot(fig=fig)
+	
+	# Dataframe in which the result wecs is stored
+	result_wecs = wecs.iloc[w:w+2,:]
+	
+	# Function to download the result_wecs dataframe as a csv file
+	def download_link(object_to_download, download_filename, download_link_text):
+	    """
+	    Generates a link to download the given object_to_download.
+	    """
+	    if isinstance(object_to_download,pd.DataFrame):
+	        object_to_download = object_to_download.to_csv(index=False)
+
+	    # some strings <-> bytes conversions necessary here
+	    b64 = base64.b64encode(object_to_download.encode()).decode()
+
+	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Dwonlod data sheet as csv"></a>'
+
+	# Download button
+	tmp_download_link = download_link(result_wecs, wecs.iloc[w,3] + '.csv', wecs.iloc[w,3])
+	st.markdown(tmp_download_link, unsafe_allow_html=True)
 	
 	# Giving additional information of the WECS
 	if st.checkbox('Show more details'):
