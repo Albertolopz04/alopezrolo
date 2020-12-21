@@ -273,15 +273,15 @@ st.write('---')
 # - Download all the data
 '### Get all the data 📥'
 # - Data unfiltered (hidden in a button)
-':paperclip: You can also check the full database here:'
+':paperclip: You can check the full database here:'
 if st.checkbox('Show complete WECS list unfiltered'):
 	st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
 ''
 ''
-'⬇️ Or download the full database:'
-if st.button('Download data'):
-	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Complete Excel'), unsafe_allow_html=True)
-else:
-    st.write('')
+#'⬇️ Or download the full database:'
+#if st.button('Download data'):
+#	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Complete Excel'), unsafe_allow_html=True)
+#else:
+#    st.write('')
 
 st.write('---')
