@@ -215,12 +215,11 @@ with st.beta_expander('Show the power curve of the results'):
 		st.table(wecs.iloc[w,1:9])
 	
 	wecsSeries = pd.concat([wecsV,wecsP], axis = 1)
-	'---'
 
 	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
-	'#### Power curve of all the WECS found'
+	'#### List of all the WECS found'
 	''
-	if st.checkbox('Display all the power curves individually'):
+	if st.checkbox('Display all the power curves as a list'):
 		for i in range(wecs_selected.shape[0]):
 			st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
 			#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
@@ -270,9 +269,9 @@ with st.beta_expander('Show the power curve of the results'):
 
 
 ''
-st.write('---')
+''
 # - Download all the data
-'### Check all the data 📥'
+'### Check all the data'
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can check the full database here:'
 with st.beta_expander('Show complete WECS list unfiltered'):
