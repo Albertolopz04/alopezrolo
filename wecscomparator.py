@@ -76,6 +76,7 @@ with st.sidebar.beta_expander('More information'):
 	'* Website of the manufacturer'
 	'* Power and performance (cp) curve')
 	' '
+	
 
 '## Results 📊'
 # Filterig data
@@ -120,7 +121,7 @@ wecsSeries = pd.DataFrame()
 legend = []
 if wecs_selected.shape[0] > 10:
 	st.info('Check once you have narrowed down the search to a handful of WECS.')
-if st.checkbox('Show the power curve of the results'):
+with st.beta_expander('Show the power curve of the results'):
 	'#### Graph of all the WECS that meet the user criteria'
 	fig, ax = plt.subplots()
 	for i in range(wecs_selected.shape[0]):
@@ -271,10 +272,10 @@ if st.checkbox('Show the power curve of the results'):
 ''
 st.write('---')
 # - Download all the data
-'### Get all the data 📥'
+'### Check all the data 📥'
 # - Data unfiltered (hidden in a button)
 ':paperclip: You can check the full database here:'
-if st.checkbox('Show complete WECS list unfiltered'):
+with st.beta_expander('Show complete WECS list unfiltered'):
 	st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
 ''
 ''
