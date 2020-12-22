@@ -65,17 +65,17 @@ if st.sidebar.checkbox('Select manufacturer'):
 		manufacturer_selected = manufacturer[manufacturer['manufacturerName']==manufacturer_selected].iloc[0,0]
 
 st.sidebar.write('---')
-with st.sidebar.beta_expander('More information'):
-		st.sidebar.write('This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
-		'Once the WECS are filtered the following values will be displayed'
-		'* Manufacturer name'
-		'* Nominal Power'
-		'* Type'
-		'* Blades Diameter'
-		'* Onshore/Offshore'
-		'* Website of the manufacturer'
-		'* Power and performance (cp) curve')
-		' '
+with st.beta_expander('More information'):
+	st.sidebar.write('This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
+	'Once the WECS are filtered the following values will be displayed'
+	'* Manufacturer name'
+	'* Nominal Power'
+	'* Type'
+	'* Blades Diameter'
+	'* Onshore/Offshore'
+	'* Website of the manufacturer'
+	'* Power and performance (cp) curve')
+	' '
 	
 
 '## Results 📊'
