@@ -66,7 +66,7 @@ if st.sidebar.checkbox('Select manufacturer'):
 
 st.sidebar.write('---')
 with st.beta_expander('More information'):
-	st.write('This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
+	'This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
 	'Once the WECS are filtered the following values will be displayed'
 	'* Manufacturer name'
 	'* Nominal Power'
@@ -74,7 +74,7 @@ with st.beta_expander('More information'):
 	'* Blades Diameter'
 	'* Onshore/Offshore'
 	'* Website of the manufacturer'
-	'* Power and performance (cp) curve')
+	'* Power and performance (cp) curve'
 	' '
 	
 
