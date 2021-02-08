@@ -1,10 +1,8 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import base64
-import os
+import base64, os
 import altair
 
 # - Setting web configuration
@@ -15,7 +13,21 @@ st.set_page_config(
 
 # - Heading
 st.title('🔎 WECS Easy Choice v.2')
-st.write("""In this webapp you can *find* the **wind turbine** that best suits your needs."""	)
+st.write('In this webapp you can *find* the **wind turbine** that best suits your needs.')
+
+# - Define a download formula
+def download_link(object_to_download, download_filename, download_link_text):
+	    """
+	    Generates a link to download the given object_to_download.
+	    """
+	    if isinstance(object_to_download,pd.DataFrame):
+	        object_to_download = object_to_download.to_csv(index=False)
+
+	    # some strings <-> bytes conversions necessary here
+	    b64 = base64.b64encode(object_to_download.encode()).decode()
+
+	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Download data sheet"></a>'
+
 # - Loading the data
 st.cache()
 wecs = pd.read_csv('300_wecsdata.csv', delimiter=';',  error_bad_lines=False, encoding='latin-1')
