@@ -221,7 +221,7 @@ with st.beta_expander('Show the power curve of the results'):
 '### Additional tools'
 with st.beta_expander('Show additional analysis tools'):
 
-	'Range of nominal power of each type in the database:'
+	'Distribution of the nominal power of each type in the database:'
 	wecs_bien = wecs[(wecs.type==1) |(wecs.type==2) |(wecs.type==3) | (wecs.type==4)]
 	wecs_bien['type'] = wecs_bien['type'].apply(str)
 
@@ -266,7 +266,7 @@ with st.beta_expander('Show additional analysis tools'):
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('offshore?')]
 	).properties(selection = multi,width =600,height=300).interactive()
 
-	st.write('**Blade Diameter vs Rated Power**') 
+	st.write('**Blade Diameter vs Rated Power** distribution') 
 	st.write('Categorized by type and by onshore/offshore design',
 	'(*Click* on any data point to *filter* by that category on both charts)')
 	bladepower & bladepowerofs
