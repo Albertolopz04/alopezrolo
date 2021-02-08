@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import base64
 import os
+import altair
 
 # - Setting web configuration
 st.set_page_config(
