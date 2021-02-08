@@ -94,7 +94,8 @@ with st.beta_expander('More information'):
 if manufacturer_selected != ' ':
 	wecs_selected = wecs[(wecs.brandID==manufacturer_selected)  & (wecs['power'].between(rated_power_min,rated_power_max)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 else:
-	wecs_selected = wecs[(wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+	wecs_selected = wecs[(wecs['power'].between(rated_power_min,rated_power_max)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+	#(wecs.datavp=='v') & 
 
 matching_wecs = int(wecs_selected.shape[0]/2)
 wecs_selected_list = wecs_selected[(wecs_selected['datavp']=='v')]
@@ -110,6 +111,7 @@ else:
 	wecs_selected_indexes=list(wecs_selected.iloc[:,1].index)   
 
 '---'	
+
 
 
 def get_binary_file_downloader_html(bin_file, file_label='File'):
