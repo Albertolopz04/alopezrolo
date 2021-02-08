@@ -96,60 +96,55 @@ if manufacturer_selected != ' ':
 else:
 	wecs_selected = wecs[(wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
-	# Calculating the perfomrance coefficient
-# Calculating the perfomrance coefficient
-P = 1500000      				# Power in Watts [w]
-rho = 1.225   					# Air density [kg/km3]
-v = 10        					# Wind velocity [m/s]
-D = 90        					# Blades diameter [m]
-D = 100
-Ba = (3.14/4) * (90)*(90) 		# Blades cross-section-area [m2]
-
-cp = (2*P)/(rho * Ba * v*v*v) 	# Performance Factor [W s3/kg m2]
-
-
+matching_wecs = int(wecs_selected.shape[0]/2)
+wecs_selected_list = wecs_selected[(wecs_selected['datavp']=='v')]
 # - Displaying the data
 if (wecs_selected.shape[0]) == 0:
 	st.error('There are no WECS that match your criteria')
 	st.write('Modify the parameters that you have selected.')
 else:
-	st.success(str(wecs_selected.shape[0]) + ' WECS meet your criteria.')
+	matching_wecs = int(wecs_selected.shape[0]/2)
+	st.success(str(matching_wecs) + ' WECS meet your criteria.')
 	st.write('These are the WECS that match your parameters: ')
-	wecs_selected.loc[:,['wecsID','name','power','bladediameter','type']]
+	wecs_selected[(wecs.datavp=='v')].loc[:,['wecsID','name','power','bladediameter','type']]
+	wecs_selected_indexes=list(wecs_selected.iloc[:,1].index)   
 
-# - Download excel function	
+'---'	
+
+
 def get_binary_file_downloader_html(bin_file, file_label='File'):
-		with open(bin_file, 'rb') as f:
-			data = f.read()
-			bin_str = base64.b64encode(data).decode()
-			href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
-		return href
-''
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+    return href
+	
+	
 
-# - Plotting the data
+# -- Plotting the data
 '### Plotting the results'
-wecsSeries = pd.DataFrame()
-legend = []
-if wecs_selected.shape[0] > 10:
+
+if matching_wecs >10:
 	st.info('Check once you have narrowed down the search to a handful of WECS.')
+else:
+	''
+wecsSeries = pd.DataFrame()
+legend = []	
 with st.beta_expander('Show the power curve of the results'):
 	'#### Graph of all the WECS that meet the user criteria'
 	fig, ax = plt.subplots()
-	for i in range(wecs_selected.shape[0]):
+	for i in range(matching_wecs):
 		w = wecs_selected.iloc[i,1]
 		w = w*2 - 2
-				
+		
 		# Store the wind and power data of the wecs in two variables
-		wecsV=wecs.iloc[w,9:(9+90)]
-		wecsP=wecs.iloc[(w+1),9:(9+90)]
-		wecsSeries = pd.concat([wecsSeries,wecsV,wecsP], axis = 1)
+		wecsSeries = pd.concat([wecsSeries,wecs.iloc[w:(w+2),9:(9+90)]])
 		a = int(2*i+1)
 		b = int(2*i)
-		ax.plot(wecsSeries.iloc[:,b],wecsSeries.iloc[:,a])
-		legend.append(wecs_selected.iloc[i,3])
+		ax.plot(wecsSeries.iloc[b,:],wecsSeries.iloc[a,:])
+		legend.append(wecs_selected_list.iloc[i,3])
 		
-
-
+		
 	ax.set(xlabel='Wind Speed (m/s)', ylabel='Power Output (KW)', title='WECS Comparator')
 	ax.grid()
 	plt.legend(legend)
@@ -157,34 +152,38 @@ with st.beta_expander('Show the power curve of the results'):
 	plt.show()
 	st.pyplot(fig=fig)
 
+	#Botón de descarga de la tabla
+	wecs_selected_download = wecs[ (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+	wecs_selected_download = pd.concat([wecs_selected_download.iloc[:,([0,3,4,5,6])], wecs_selected_download.iloc[:,9:99]],axis = 1)
+	tmp_download_link = download_link(wecs_selected_download.T,'WECS Comparator Results'+ '.csv', wecs.iloc[w,3])
+	st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 
-	'#### Individual WECS Power Curve and Performance Factor'
+	'#### Individual WECS power curve'
 	# 1. Select the WECS that is going to be plotted
-	wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected['name'].tolist())
-	# Find the wecsID of the selected WECS
-	w = wecs_selected[wecs_selected['name']==wecs_plotted].iloc[0,1]
-	# Find it in the dataframe
-	w = w*2 - 2
-		
-	# Store the wind and power data of the wecs in two variables
-	wecsV=wecs.iloc[w,9:(9+90)]
-	wecsP=wecs.iloc[(w+1),9:(9+90)]
-
+	wecs_plotted = st.selectbox('Choose the WECS to plot',wecs_selected_list['name'].tolist())
+	lista = wecs_selected_list['name'].tolist()
+	lista_indice = lista.index(wecs_plotted)
+	# Assign the index of the WECS to find it in the DataFrame
+	wi = lista_indice
+	w = lista_indice
+	w = w*2
+	
 	# Calculate Cp curve of the WECS
-	v = wecsV
-	P = wecsP * 1000 
-	D = wecs.iloc[w,5]
-	Ba = (np.pi/4) * (D)*(D) 		# Blades cross-section-area [m2]
-	cp = (2*P)/(rho * Ba * (v*v*v))
+	v = wecsSeries.iloc[w,:]			# Wind Velocity 			[m/s]
+	P = wecsSeries.iloc[w+1,:] * 1000	# WECS Power in Watts 		[w] 
+	D = wecs_selected.iloc[wi,5]		# Blades diameter 			[m]
+	Ba = (np.pi/4) * (D)*(D) 			# Blades cross-section-area [m2]
+	rho = 1.225							# Air density 				[kg/km3]
+	
+	cp = (2*P)/(rho * Ba * (v*v*v))		# Performance Factor 		[W s3/kg m2]
 
 	# Plotting the power curve of the wecs
 	fig, ax1 = plt.subplots()
-
 	color1 = 'tab:blue'
 	ax1.set_xlabel('Wind velocity (m/s)')
 	ax1.set_ylabel('Power Output (kW)') #color = color1)
-	ax1.plot(v, wecsP, color = color1)
+	ax1.plot(v, wecsSeries.iloc[w+1,:], color = color1)
 	
 	ax2 = ax1.twinx() # initiate a second axes that shares the same x-axis
 
@@ -195,37 +194,30 @@ with st.beta_expander('Show the power curve of the results'):
 	ax2.set_ylim([0,1])
 
 	ax1.grid()
-	ax1.set(title=wecs.iloc[w,3])
+	ax1.set(title=wecs_selected_list.iloc[wi,3])
 	fig.tight_layout()
 	plt.show()
 	st.pyplot(fig=fig)
 	
-	# Dataframe in which the result wecs is stored
-	result_wecs = wecs.iloc[w:w+2,:]
-	
-	# Function to download the result_wecs dataframe as a csv file
-	def download_link(object_to_download, download_filename, download_link_text):
-	    """
-	    Generates a link to download the given object_to_download.
-	    """
-	    if isinstance(object_to_download,pd.DataFrame):
-	        object_to_download = object_to_download.to_csv(index=False)
 
-	    # some strings <-> bytes conversions necessary here
-	    b64 = base64.b64encode(object_to_download.encode()).decode()
-
-	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Download data-sheet as csv"></a>'
-
-	# Download button
-	tmp_download_link = download_link(result_wecs, wecs.iloc[w,3] + '.csv', wecs.iloc[w,3])
-	st.markdown(tmp_download_link, unsafe_allow_html=True)
-	
 	# Giving additional information of the WECS
-	if st.checkbox('Show more details'):
-		st.write('Database references:')
-		st.table(wecs.iloc[w,1:9])
-	
-	wecsSeries = pd.concat([wecsV,wecsP], axis = 1)
+	st.write('Database references:')
+	st.table(wecs_selected_list.iloc[wi,1:9])
+	'---'
+
+	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
+	'#### Compare all the selected WECS data'
+	''
+	if st.checkbox('Show a list of all the the WECS technical information'):
+		for i in range(matching_wecs):
+			st.write(str(i+1),'/',str(matching_wecs),'   -   ',wecs_selected_list.iloc[i,3])
+
+			# Giving additional information of the WECS
+			st.write('Database references:')
+			st.table(wecs_selected_list.iloc[i,1:9])
+
+
+''
 
 	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
 	'#### List of all the WECS found'
