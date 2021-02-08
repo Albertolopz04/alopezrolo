@@ -267,7 +267,7 @@ with st.beta_expander('Show additional analysis tools'):
 	).properties(selection = multi,width =600,height=300).interactive()
 
 	st.write('*Blade Diameter vs Rated Power* (categorized by type and by location onshore/offshore)'  
-	st.wrtie('**Click on any data point to filter by that category on both charts**')
+	st.wrtie(""" **Click** on any data point to **filter** by that category on both charts """)
 	bladepower & bladepowerofs
 
 
