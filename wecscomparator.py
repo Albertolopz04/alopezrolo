@@ -217,22 +217,66 @@ with st.beta_expander('Show the power curve of the results'):
 			st.table(wecs_selected_list.iloc[i,1:9])
 
 
-''
+'---'
+'### Additional tools'
+with st.beta_expander('Show additional analysis tools'):
 
-''
-''
-# - Download all the data
-'### Check all the data'
-# - Data unfiltered (hidden in a button)
-':paperclip: You can check the full database here:'
-with st.beta_expander('Show complete WECS list unfiltered'):
-	st.dataframe(wecs[(wecs.datavp=='v')].iloc[:,1:9])
-''
-''
-#'⬇️ Or download the full database:'
-#if st.button('Download data'):
-#	st.markdown(get_binary_file_downloader_html('300_wecsdata.xlsx', 'Complete Excel'), unsafe_allow_html=True)
-#else:
-#    st.write('')
+	'Range of nominal power of each type in the database:'
+	wecs_bien = wecs[(wecs.type==1) |(wecs.type==2) |(wecs.type==3) | (wecs.type==4)]
+	wecs_bien['type'] = wecs_bien['type'].apply(str)
+
+	click = altair.selection_multi(encodings=['color'])
+
+	chart = altair.Chart(wecs_bien).mark_point().encode(
+	    y = 'type',
+	    x = 'power',
+	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type')],
+	    color = 'type:N'
+	    #shape = altair.condition(click, 'type:N', altair.value('set2'), legend = None)
+	).properties(selection = click,width=680,height=200).interactive()
+
+
+
+	hist = altair.Chart(wecs_bien).mark_point().encode(
+	    y = 'type',
+	    color = altair.condition(click, 'type:N', altair.value('lightgray'))
+	).properties(selection = click, height = 100).interactive()
+
+	chart #| hist
+
+	# Blade Diameter vs Rated Power (categorized by type)
+	multi = altair.selection_multi(fields=['type','offshore?'])
+	color = altair.condition(multi,altair.Color('type:N'),
+			altair.value('lightgray'))
+
+	bladepower = altair.Chart(wecs_bien).mark_point().encode(
+	    x = 'power',
+	    y = 'bladediameter',
+	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
+	    color = altair.condition(multi, 'type:N', altair.value('lightgray'),legend = None),
+	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('bladediameter')],
+	).properties(selection = multi,width =600,height=300).interactive()
+
+	# Blade Diameter vs Rated Power (categorized by location offshore/onshore)
+	bladepowerofs = altair.Chart(wecs_bien).mark_point().encode(
+	    x = 'power',
+	    y = 'bladediameter',
+	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
+	    color = altair.condition(multi, 'offshore?:N', altair.value('lightgray')),
+	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('offshore?')]
+	).properties(selection = multi,width =600,height=300).interactive()
+
+	'Blade Diameter vs Rated Power (categorized by type and by location onshore/offshore)'  
+	bladepower & bladepowerofs
+
 
 st.write('---')
+
+# - Check all the data
+'### Check all the data 📥'
+   
+with st.beta_expander('Show  unfiltered WECS list'):
+	wecs[(wecs.datavp=='v')].iloc[:,1:9]
+
+st.write('---')
+
