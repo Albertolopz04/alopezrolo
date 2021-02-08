@@ -219,58 +219,6 @@ with st.beta_expander('Show the power curve of the results'):
 
 ''
 
-	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
-	'#### List of all the WECS found'
-	''
-	if st.checkbox('Display all the power curves as a list'):
-		for i in range(wecs_selected.shape[0]):
-			st.write(str(i+1),'/',str(wecs_selected.shape[0]),'   -   ',wecs_selected.iloc[i,3])
-			#wecs_selected.iloc[i,1],wecs_selected.iloc[i,3], wecs_selected.iloc[i,4], 'kW'
-			w = wecs_selected.iloc[i,1]
-			w = w*2 - 2
-			
-			# Store the wind and power data of the wecs in two variables
-			wecsV=wecs.iloc[w,9:(9+90)]
-			wecsP=wecs.iloc[(w+1),9:(9+90)]
-			wecsSeries = pd.concat([wecsSeries,wecsV,wecsP], axis = 1)
-			
-
-			# Calculate Cp curve of the WECS
-			v = wecsV
-			P = wecsP * 1000 
-			D = wecs.iloc[w,5]
-			Ba = (np.pi/4) * (D)*(D) 		# Blades cross-section-area [m2]
-			cp = (2*P)/(rho * Ba * (v*v*v))
-
-
-			# Plotting the power curve of the wecs
-			fig, ax1 = plt.subplots()
-
-			color1 = 'tab:blue'
-			ax1.set_xlabel('Wind velocity (m/s)')
-			ax1.set_ylabel('Power Output (kW)') #color = color1)
-			ax1.plot(v, wecsP, color = color1)
-
-			ax2 = ax1.twinx() # initiate a second axes that shares the same x-axis
-
-			color2 = 'tab:red'
-			ax2.set_ylabel('Performance Factor (Cp)', color = color2)
-			ax2.plot(v, cp, color = color2)
-			ax2.tick_params(axis='y',labelcolor=color2)
-			ax2.set_ylim([0,1])
-
-			ax1.grid()
-			ax1.set(title=wecs.iloc[w,3])
-			fig.tight_layout()
-			plt.show()
-			st.pyplot(fig=fig)
-
-			# Giving additional information of the WECS
-			st.write('Database references:')
-			st.table(wecs.iloc[w,1:9])
-
-
-
 ''
 ''
 # - Download all the data
