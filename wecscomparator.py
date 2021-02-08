@@ -45,7 +45,7 @@ st.sidebar.write('The app will show you WECS between ', rated_power_min, ' and '
 
 # 2.Seleccionar el tipo
 st.sidebar.write("""	### Select the type of wind turbine	""")
-type_selected=st.sidebar.multiselect('Type', ['1','2','3','4'],['1','2','3','4'])
+type_selected=st.sidebar.multiselect('Type', ['1','2','3','4','0'],['1','2','3','4'])
 
 # 3.Seleccionar Onshore/Offshore
 st.sidebar.write("""	### Select whether the WECS is designed for Onshore/Offshore""")
@@ -224,7 +224,7 @@ with st.beta_expander('Show the power curve of the results'):
 with st.beta_expander('Show additional analysis tools'):
 
 	'Distribution of the nominal power of each type in the database:'
-	wecs_bien = wecs[(wecs.type==1) |(wecs.type==2) |(wecs.type==3) | (wecs.type==4)]
+	wecs_bien = wecs[(wecs.type==1) |(wecs.type==2) |(wecs.type==3) | (wecs.type==4) | (wecs.type==0)]
 	wecs_bien['type'] = wecs_bien['type'].apply(str)
 
 	click = altair.selection_multi(encodings=['color'])
