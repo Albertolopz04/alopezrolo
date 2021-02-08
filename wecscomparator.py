@@ -32,22 +32,19 @@ def download_link(object_to_download, download_filename, download_link_text):
 st.cache()
 wecs = pd.read_csv('300_wecsdata.csv', delimiter=';',  error_bad_lines=False, encoding='latin-1')
 
+
 # - Selecting the parameters
-st.sidebar.write("""	### Select the rated power	""")
-rated_power_selected = st.sidebar.slider('Rated Power (kW)', 0, 10000,2500,500 )
-#'You selected a ', rated_power_selected/1000, 'MW WECS'
+st.sidebar.write("""	## Filter Parameters	""")
 
 # 1.Definir intervalo del rated power
-interval = 501
-rated_power_min = rated_power_selected - interval
-rated_power_max = rated_power_selected + interval
-st.sidebar.write('The app will show you WECS between ', rated_power_min + 1, ' and ', rated_power_max - 1, 'kW')
+st.sidebar.write("""	### Select the rated power	""")
+rated_power_selected = st.sidebar.slider('Rated Power (kW)', 0, 10000, (500,5000), 500 )
+rated_power_min = rated_power_selected[0]
+rated_power_max = rated_power_selected[1]
+st.sidebar.write('The app will show you WECS between ', rated_power_min, ' and ', rated_power_max, 'kW')
 
 # 2.Seleccionar el tipo
 st.sidebar.write("""	### Select the type of wind turbine	""")
-#st.sidebar.write(
-#""" If you dont know what this mean check this [article](https://solarfeeds.com/types-of-wind-turbine-generators-and-their-functions/)"""
-#)
 type_selected=st.sidebar.multiselect('Type', ['1','2','3','4'],['1','2','3','4'])
 
 # 3.Seleccionar Onshore/Offshore
@@ -77,6 +74,7 @@ if st.sidebar.checkbox('Select manufacturer'):
 	else:
 		manufacturer_selected = manufacturer[manufacturer['manufacturerName']==manufacturer_selected].iloc[0,0]
 
+# 5. Información sobre el proyecto 		
 st.sidebar.write('---')
 with st.beta_expander('More information'):
 	'This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
@@ -94,7 +92,7 @@ with st.beta_expander('More information'):
 '## Results 📊'
 # Filterig data
 if manufacturer_selected != ' ':
-	wecs_selected = wecs[(wecs.brandID==manufacturer_selected) & (wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
+	wecs_selected = wecs[(wecs.brandID==manufacturer_selected)  & (wecs['power'].between(rated_power_min,rated_power_max)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 else:
 	wecs_selected = wecs[(wecs.datavp=='v') & (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 
