@@ -266,8 +266,8 @@ with st.beta_expander('Show additional analysis tools'):
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('offshore?')]
 	).properties(selection = multi,width =600,height=300).interactive()
 
-	st.write('**Blade Diameter vs Rated Power** (categorized by type and by onshore/offshore design)') 
-	st.write(""" *Click* on any data point to *filter* by that category on both charts """)
+	st.write('**Blade Diameter vs Rated Power** (categorized by type and by onshore/offshore design)',
+	'*Click* on any data point to *filter* by that category on both charts')
 	bladepower & bladepowerofs
 
 
