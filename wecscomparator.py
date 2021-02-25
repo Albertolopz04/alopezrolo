@@ -276,7 +276,6 @@ with st.beta_expander('Show additional analysis tools'):
 	bladepower & bladepowerofs
 
 
-st.write('---')
 
 # - Check all the data
 '### Check all the data 📥'
@@ -284,5 +283,5 @@ st.write('---')
 with st.beta_expander('Show  unfiltered WECS list'):
 	wecs[(wecs.datavp=='v')].iloc[:,1:9]
 
-st.write('---')
+
 
