@@ -254,23 +254,23 @@ with st.beta_expander('Show additional analysis tools'):
 			altair.value('lightgray'))
 
 	bladepower = altair.Chart(wecs_bien).mark_point().encode(
-	    x = 'power',
-	    y = 'bladediameter',
+	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
+	    y=altair.X('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
 	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
 	    color = altair.condition(multi, 'type:N', altair.value('lightgray'),legend = None),
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('bladediameter')],
 	).properties(selection = multi,width =600,height=300).interactive()
 
-	# Blade Diameter vs Rated Power (categorized by location offshore/onshore)
+	# Blade Diameter vs Nated Power (categorized by location offshore/onshore)
 	bladepowerofs = altair.Chart(wecs_bien).mark_point().encode(
-	    x = 'power',
-	    y = 'bladediameter',
+	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
+	    y=altair.X('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
 	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
 	    color = altair.condition(multi, 'offshore?:N', altair.value('lightgray')),
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('offshore?')]
 	).properties(selection = multi,width =600,height=300).interactive()
 
-	st.write('**Blade Diameter vs Rated Power distribution**') 
+	st.write('**Blade Diameter vs Nominal Power distribution**') 
 	st.write('Categorized by type and by onshore/offshore design',
 	'(*Click* on any data point to *filter* by that category on both charts)')
 	bladepower & bladepowerofs
