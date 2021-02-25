@@ -232,7 +232,7 @@ with st.beta_expander('Show additional analysis tools'):
 	click = altair.selection_multi(encodings=['color'])
 
 	chart = altair.Chart(wecs_bien).mark_point().encode(
-	    y = 'type',
+	    y=altair.Y('type', axis=altair.Axis(title='Type')),
 	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type')],
 	    color = 'type:N'
@@ -242,7 +242,7 @@ with st.beta_expander('Show additional analysis tools'):
 
 
 	hist = altair.Chart(wecs_bien).mark_point().encode(
-	    y = 'type',
+	    y=altair.Y('type', axis=altair.Axis(title='Type')),
 	    color = altair.condition(click, 'type:N', altair.value('lightgray'))
 	).properties(selection = click, height = 100).interactive()
 
@@ -255,7 +255,7 @@ with st.beta_expander('Show additional analysis tools'):
 
 	bladepower = altair.Chart(wecs_bien).mark_point().encode(
 	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
-	    y=altair.X('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
+	    y=altair.Y('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
 	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
 	    color = altair.condition(multi, 'type:N', altair.value('lightgray'),legend = None),
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('bladediameter')],
@@ -264,7 +264,7 @@ with st.beta_expander('Show additional analysis tools'):
 	# Blade Diameter vs Nated Power (categorized by location offshore/onshore)
 	bladepowerofs = altair.Chart(wecs_bien).mark_point().encode(
 	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
-	    y=altair.X('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
+	    y=altair.Y('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
 	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
 	    color = altair.condition(multi, 'offshore?:N', altair.value('lightgray')),
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('offshore?')]
