@@ -76,7 +76,7 @@ if st.sidebar.checkbox('Select a manufacturer (Optional)'):
 
 # 5. Información sobre el proyecto 		
 st.sidebar.write('---')
-with st.sidebar.beta_expander('About this proyect'):
+with st.sidebar.beta_expander('About this project'):
 	'This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
 	'Once the WECS are filtered the following values will be displayed'
 	'* Manufacturer name'
@@ -88,6 +88,7 @@ with st.sidebar.beta_expander('About this proyect'):
 	'* Power and performance (cp) curve'
 	' '
 	
+'---'
 'Select the parameters that will filter the data that best suit your query on the sidebar.' 
 	
 '## Results 📊'
