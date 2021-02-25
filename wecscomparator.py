@@ -232,8 +232,8 @@ with st.beta_expander('Show additional analysis tools'):
 	click = altair.selection_multi(encodings=['color'])
 
 	chart = altair.Chart(wecs_bien).mark_point().encode(
-	    y = 'Type',
-	    x = 'Nominal Power',
+	    y = 'type',
+	    x = 'power',
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type')],
 	    color = 'type:N'
 	    #shape = altair.condition(click, 'type:N', altair.value('set2'), legend = None)
