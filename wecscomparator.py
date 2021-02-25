@@ -275,7 +275,7 @@ with st.beta_expander('Show additional analysis tools'):
 	'(*Click* on any data point to *filter* by that category on both charts)')
 	bladepower & bladepowerofs
 
-
+''
 
 # - Check all the data
 '### Check all the data 📥'
@@ -283,5 +283,5 @@ with st.beta_expander('Show additional analysis tools'):
 with st.beta_expander('Show  unfiltered WECS list'):
 	wecs[(wecs.datavp=='v')].iloc[:,1:9]
 
-
+''
 
