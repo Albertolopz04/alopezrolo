@@ -233,7 +233,7 @@ with st.beta_expander('Show additional analysis tools'):
 
 	chart = altair.Chart(wecs_bien).mark_point().encode(
 	    y = 'type',
-	    x=altair.X('power', axis=alt.Axis(title='Nominal Power (kW)')),
+	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
 	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type')],
 	    color = 'type:N'
 	    #shape = altair.condition(click, 'type:N', altair.value('set2'), legend = None)
