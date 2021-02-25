@@ -221,7 +221,7 @@ with st.beta_expander('Show the power curve of the results'):
 			st.table(wecs_selected_list.iloc[i,1:9])
 
 
-'---'
+' '
 '### Additional tools for exploring the dataset'
 with st.beta_expander('Show additional analysis tools'):
 
