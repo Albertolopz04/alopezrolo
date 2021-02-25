@@ -49,7 +49,7 @@ type_selected=st.sidebar.multiselect('Type', ['1','2','3','4','0'],['1','2','3',
 
 # 3.Seleccionar Onshore/Offshore
 st.sidebar.write("""	### Select whether the WECS is designed for Onshore/Offshore""")
-shore = st.sidebar.radio("Select if the WECS you are looking for is going to be at see or at land.",('Onshore','Offshore'))
+shore = st.sidebar.radio("Select if the WECS you are looking for is going to be at land or at see.",('Onshore','Offshore'))
 of = shore
 if of == 'Offshore':
 	of = 1
@@ -59,7 +59,7 @@ elif of == 'Onshore':
 # 4.Seleccionar el fabricante
 st.sidebar.write("""	### Filter by manufacturer	""")
 manufacturer_selected = ' '
-if st.sidebar.checkbox('Select manufacturer'):
+if st.sidebar.checkbox('Select a manufacturer (Optional)'):
 	
 	# Convert the csv file into a list to display it on the select box
 	manufacturer = pd.read_csv('manufacturerList.csv', delimiter=';', error_bad_lines=False, encoding='utf-8')
@@ -76,7 +76,7 @@ if st.sidebar.checkbox('Select manufacturer'):
 
 # 5. Información sobre el proyecto 		
 st.sidebar.write('---')
-with st.sidebar.beta_expander('More information'):
+with st.sidebar.beta_expander('About this proyect'):
 	'This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
 	'Once the WECS are filtered the following values will be displayed'
 	'* Manufacturer name'
@@ -88,7 +88,8 @@ with st.sidebar.beta_expander('More information'):
 	'* Power and performance (cp) curve'
 	' '
 	
-
+'Select the parameters that will filter the data that best suit your query on the sidebar.' 
+	
 '## Results 📊'
 # Filterig data
 if manufacturer_selected != ' ':
