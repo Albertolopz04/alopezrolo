@@ -233,7 +233,7 @@ with st.beta_expander('Show the power curve of the results'):
 
 	'#### Interactive chart'
 	'''Hover over the marks to **show** the Rated Power or Cp at each data point.   	
-	Use the mouse wheel to *zoom in* or *zoom out* the data'''
+	\nUse the mouse wheel to *zoom in* or *zoom out* the data'''
 	plotline + plotmark & plotcp + plotcpmark
 
 	# Giving additional information of the WECS
