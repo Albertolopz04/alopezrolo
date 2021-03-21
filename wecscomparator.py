@@ -232,8 +232,7 @@ with st.beta_expander('Show the power curve of the results'):
 		tooltip = [alt.Tooltip('Cp'), alt.Tooltip('Wind Velocity (m/s)')]).interactive()
 
 	'#### Interactive chart'
-	'*Hover over* the marks to show the Rated Power or Cp at each wind velocity'
-	'Use the mouse wheel to *zoom in* or *zoom out* the data'
+	'Hover over the marks to **show** the Rated Power or Cp at each wind velocity. Use the mouse wheel to *zoom in* or *zoom out* the data'
 	plotline + plotmark & plotcp + plotcpmark
 
 	# Giving additional information of the WECS
