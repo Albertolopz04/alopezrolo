@@ -217,19 +217,19 @@ with st.beta_expander('Show the power curve of the results'):
 	plotline = base.mark_line(stroke='#5276A7').encode(
 		alt.Y('Rated Power (kW)',
 			axis=alt.Axis(title='Rated Power [kW]')),
-		tooltip = [altair.Tooltip('Rated Power (kW)'), altair.Tooltip('Wind Velocity (m/s)')]
+		tooltip = [alt.Tooltip('Rated Power (kW)'), alt.Tooltip('Wind Velocity (m/s)')]
 		).properties(height=420).interactive()
 		
 	plotmark = base.mark_point().encode(
 		alt.Y('Rated Power (kW)'),
-		tooltip = [altair.Tooltip('Rated Power (kW)'), altair.Tooltip('Wind Velocity (m/s)')]
+		tooltip = [alt.Tooltip('Rated Power (kW)'), alt.Tooltip('Wind Velocity (m/s)')]
 		).interactive()
 	plotcp= base.mark_line(color='red').encode(
 		alt.Y('Cp',axis=alt.Axis(title='Coeficient of Performance'),scale = alt.Scale(domain=(0,1))),
-		tooltip = [altair.Tooltip('Cp'), altair.Tooltip('Wind Velocity (m/s)')]).interactive()
+		tooltip = [alt.Tooltip('Cp'), alt.Tooltip('Wind Velocity (m/s)')]).interactive()
 	plotcpmark= base.mark_point(color='red').encode(
 		alt.Y('Cp'),
-		tooltip = [altair.Tooltip('Cp'), altair.Tooltip('Wind Velocity (m/s)')]).interactive()
+		tooltip = [alt.Tooltip('Cp'), alt.Tooltip('Wind Velocity (m/s)')]).interactive()
 
 
 	plotline + plotmark
