@@ -235,6 +235,10 @@ with st.beta_expander('Show the power curve of the results'):
 	'''Hover over the marks to **show** the Rated Power or Cp at each wind velocity.   	
 	Use the mouse wheel to *zoom in* or *zoom out* the data'''
 	plotline + plotmark & plotcp + plotcpmark
+	
+	# Descarga de la WECS elegida
+	tmp_download_link = download_datalink(plotdata, wecs_selected_list.iloc[wi,3]+ '.csv', wecs.iloc[w,3])
+	st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 	# Giving additional information of the WECS
 	#st.write('Database references:')
