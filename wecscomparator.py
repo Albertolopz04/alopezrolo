@@ -174,11 +174,11 @@ with st.beta_expander('Show the power curve of the results'):
 	w = w*2
 	
 	# Calculate Cp curve of the WECS
-	v = wecsSeries.iloc[w,:]			# Wind Velocity 			[m/s]
+	v = wecsSeries.iloc[w,:]		# Wind Velocity 		[m/s]
 	P = wecsSeries.iloc[w+1,:] * 1000	# WECS Power in Watts 		[w] 
-	D = wecs_selected.iloc[wi,5]		# Blades diameter 			[m]
-	Ba = (np.pi/4) * (D)*(D) 			# Blades cross-section-area [m2]
-	rho = 1.225							# Air density 				[kg/km3]
+	D = wecs_selected.iloc[wi,5]		# Blades diameter 		[m]
+	Ba = (np.pi/4) * (D)*(D) 		# Blades cross-section-area 	[m2]
+	rho = 1.225				# Air density 			[kg/km3]
 	
 	cp = (2*P)/(rho * Ba * (v*v*v))		# Performance Factor 		[W s3/kg m2]
 
@@ -232,7 +232,7 @@ with st.beta_expander('Show the power curve of the results'):
 		tooltip = [alt.Tooltip('Cp'), alt.Tooltip('Wind Velocity (m/s)')]).interactive()
 
 	'#### Interactive chart'
-	'Hover over the marks to **show** the Rated Power or Cp at each wind velocity. Use the mouse wheel to *zoom in* or *zoom out* the data'
+	'Hover over the marks to **show** the Rated Power or Cp at each data point. Use the mouse wheel to *zoom in* or *zoom out* the data'
 	plotline + plotmark & plotcp + plotcpmark
 
 	# Giving additional information of the WECS
