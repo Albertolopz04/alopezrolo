@@ -26,7 +26,20 @@ def download_link(object_to_download, download_filename, download_link_text):
 	    # some strings <-> bytes conversions necessary here
 	    b64 = base64.b64encode(object_to_download.encode()).decode()
 
-	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Download data sheet"></a>'
+	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Download a csv file with the selected WECS"></a>'
+
+def download_datasheet(object_to_download, download_filename, download_link_text):
+	    """
+	    Generates a link to download the given object_to_download.
+	    """
+	    if isinstance(object_to_download,pd.DataFrame):
+	        object_to_download = object_to_download.to_csv(index=False)
+
+	    # some strings <-> bytes conversions necessary here
+	    b64 = base64.b64encode(object_to_download.encode()).decode()
+
+	    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}"><input type="button" value="Download a csv file for this WECS"></a>'
+
 
 # - Loading the data
 st.cache()
@@ -237,7 +250,7 @@ with st.beta_expander('Show the power curve of the results'):
 	plotline + plotmark & plotcp + plotcpmark
 	
 	# Descarga de la WECS elegida
-	tmp_download_link = download_datalink(plotdata, wecs_selected_list.iloc[wi,3]+ '.csv', wecs.iloc[w,3])
+	tmp_download_link = download_datasheet(plotdata, wecs_selected_list.iloc[wi,3]+ '.csv', wecs.iloc[w,3])
 	st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 	# Giving additional information of the WECS
