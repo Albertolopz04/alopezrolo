@@ -284,7 +284,7 @@ with st.beta_expander('Show additional analysis tools'):
 	chart = alt.Chart(wecs_bien).mark_point().encode(
 	    y=alt.Y('type', axis=alt.Axis(title='Type')),
 	    x=alt.X('power', axis=alt.Axis(title='Nominal Power (kW)')),
-	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type')],
+	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('power')],
 	    color = 'type:N'
 	    #shape = alt.condition(click, 'type:N', alt.value('set2'), legend = None)
 	).properties(selection = click,width=680,height=200).interactive()
@@ -308,7 +308,7 @@ with st.beta_expander('Show additional analysis tools'):
 	    y=alt.Y('bladediameter', axis=alt.Axis(title='Blade Diameter (m)')),
 	    shape = alt.condition(multi, 'type:N', alt.value('lightgray')),
 	    color = alt.condition(multi, 'type:N', alt.value('lightgray'),legend = None),
-	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('bladediameter')],
+	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('bladediameter'),alt.Tooltip('power')],
 	).properties(selection = multi,width =600,height=300).interactive()
 
 	# Blade Diameter vs Nated Power (categorized by location offshore/onshore)
@@ -317,7 +317,7 @@ with st.beta_expander('Show additional analysis tools'):
 	    y=alt.Y('bladediameter', axis=alt.Axis(title='Blade Diameter (m)')),
 	    shape = alt.condition(multi, 'type:N', alt.value('lightgray')),
 	    color = alt.condition(multi, 'offshore?:N', alt.value('lightgray')),
-	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('offshore?')]
+	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('offshore?'),alt.Tooltip('power')]
 	).properties(selection = multi,width =600,height=300).interactive()
 
 	st.write('**Blade Diameter vs Nominal Power distribution**') 
