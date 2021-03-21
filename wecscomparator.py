@@ -271,6 +271,7 @@ with st.beta_expander('Show the power curve of the results'):
 
 
 ' '
+' '
 '### Additional tools for exploring the dataset'
 with st.beta_expander('Show additional analysis tools'):
 
