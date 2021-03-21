@@ -203,6 +203,37 @@ with st.beta_expander('Show the power curve of the results'):
 	plt.show()
 	st.pyplot(fig=fig)
 	
+	# - Plotting the power curve of the selected wecs (ALTAIR)
+	mig = wecsSeries.iloc[w:w+2,:]
+	wecsV = mig.iloc[0,:]
+	wecsP = mig.iloc[1,:]
+	wecsCp= cp
+	plotdata = pd.DataFrame({'Rated Power (kW)':wecsP, 'Wind Velocity (m/s)':wecsV, 'Cp':wecsCp})
+
+
+	base = alt.Chart(plotdata).encode(
+		alt.X('Wind Velocity (m/s)', axis=alt.Axis(title='Wind Velocity (m/s)'))).properties(width=600)
+
+	plotline = base.mark_line(stroke='#5276A7').encode(
+		alt.Y('Rated Power (kW)',
+			axis=alt.Axis(title='Rated Power [kW]')),
+		tooltip = [altair.Tooltip('Rated Power (kW)'), altair.Tooltip('Wind Velocity (m/s)')]
+		).properties(height=420).interactive()
+		
+	plotmark = base.mark_point().encode(
+		alt.Y('Rated Power (kW)'),
+		tooltip = [altair.Tooltip('Rated Power (kW)'), altair.Tooltip('Wind Velocity (m/s)')]
+		).interactive()
+	plotcp= base.mark_line(color='red').encode(
+		alt.Y('Cp',axis=alt.Axis(title='Coeficient of Performance'),scale = alt.Scale(domain=(0,1))),
+		tooltip = [altair.Tooltip('Cp'), altair.Tooltip('Wind Velocity (m/s)')]).interactive()
+	plotcpmark= base.mark_point(color='red').encode(
+		alt.Y('Cp'),
+		tooltip = [altair.Tooltip('Cp'), altair.Tooltip('Wind Velocity (m/s)')]).interactive()
+
+
+	plotline + plotmark
+	plotcp + plotcpmark
 
 	# Giving additional information of the WECS
 	#st.write('Database references:')
@@ -212,7 +243,7 @@ with st.beta_expander('Show the power curve of the results'):
 	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
 	'#### Compare all the selected WECS data'
 	''
-	if st.checkbox('Show a list of all the the WECS technical information'):
+	if st.checkbox('Show a list of the selected WECS technical information'):
 		for i in range(matching_wecs):
 			st.write(str(i+1),'/',str(matching_wecs),'   -   ',wecs_selected_list.iloc[i,3])
 
