@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import base64, os
-import altair
+import altair as alt
 
 # - Setting web configuration
 st.set_page_config(
@@ -205,9 +205,9 @@ with st.beta_expander('Show the power curve of the results'):
 	
 
 	# Giving additional information of the WECS
-	st.write('Database references:')
-	st.table(wecs_selected_list.iloc[wi,1:9])
-	'---'
+	#st.write('Database references:')
+	#st.table(wecs_selected_list.iloc[wi,1:9])
+	#'---'
 
 	# 2. Allow the user to see the plot of all the WECS that meet the user criteria.
 	'#### Compare all the selected WECS data'
@@ -229,45 +229,45 @@ with st.beta_expander('Show additional analysis tools'):
 	wecs_bien = wecs[(wecs.type==1) |(wecs.type==2) |(wecs.type==3) | (wecs.type==4) | (wecs.type==0)]
 	wecs_bien['type'] = wecs_bien['type'].apply(str)
 
-	click = altair.selection_multi(encodings=['color'])
+	click = alt.selection_multi(encodings=['color'])
 
-	chart = altair.Chart(wecs_bien).mark_point().encode(
-	    y=altair.Y('type', axis=altair.Axis(title='Type')),
-	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
-	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type')],
+	chart = alt.Chart(wecs_bien).mark_point().encode(
+	    y=alt.Y('type', axis=alt.Axis(title='Type')),
+	    x=alt.X('power', axis=alt.Axis(title='Nominal Power (kW)')),
+	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type')],
 	    color = 'type:N'
-	    #shape = altair.condition(click, 'type:N', altair.value('set2'), legend = None)
+	    #shape = alt.condition(click, 'type:N', alt.value('set2'), legend = None)
 	).properties(selection = click,width=680,height=200).interactive()
 
 
 
-	hist = altair.Chart(wecs_bien).mark_point().encode(
-	    y=altair.Y('type', axis=altair.Axis(title='Type')),
-	    color = altair.condition(click, 'type:N', altair.value('lightgray'))
+	hist = alt.Chart(wecs_bien).mark_point().encode(
+	    y=alt.Y('type', axis=alt.Axis(title='Type')),
+	    color = alt.condition(click, 'type:N', alt.value('lightgray'))
 	).properties(selection = click, height = 100).interactive()
 
 	chart #| hist
 
 	# Blade Diameter vs Rated Power (categorized by type)
-	multi = altair.selection_multi(fields=['type','offshore?'])
-	color = altair.condition(multi,altair.Color('type:N'),
-			altair.value('lightgray'))
+	multi = alt.selection_multi(fields=['type','offshore?'])
+	color = alt.condition(multi,alt.Color('type:N'),
+			alt.value('lightgray'))
 
-	bladepower = altair.Chart(wecs_bien).mark_point().encode(
-	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
-	    y=altair.Y('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
-	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
-	    color = altair.condition(multi, 'type:N', altair.value('lightgray'),legend = None),
-	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('bladediameter')],
+	bladepower = alt.Chart(wecs_bien).mark_point().encode(
+	    x=alt.X('power', axis=alt.Axis(title='Nominal Power (kW)')),
+	    y=alt.Y('bladediameter', axis=alt.Axis(title='Blade Diameter (m)')),
+	    shape = alt.condition(multi, 'type:N', alt.value('lightgray')),
+	    color = alt.condition(multi, 'type:N', alt.value('lightgray'),legend = None),
+	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('bladediameter')],
 	).properties(selection = multi,width =600,height=300).interactive()
 
 	# Blade Diameter vs Nated Power (categorized by location offshore/onshore)
-	bladepowerofs = altair.Chart(wecs_bien).mark_point().encode(
-	    x=altair.X('power', axis=altair.Axis(title='Nominal Power (kW)')),
-	    y=altair.Y('bladediameter', axis=altair.Axis(title='Blade Diameter (m)')),
-	    shape = altair.condition(multi, 'type:N', altair.value('lightgray')),
-	    color = altair.condition(multi, 'offshore?:N', altair.value('lightgray')),
-	    tooltip = [altair.Tooltip('name'),altair.Tooltip('type'),altair.Tooltip('offshore?')]
+	bladepowerofs = alt.Chart(wecs_bien).mark_point().encode(
+	    x=alt.X('power', axis=alt.Axis(title='Nominal Power (kW)')),
+	    y=alt.Y('bladediameter', axis=alt.Axis(title='Blade Diameter (m)')),
+	    shape = alt.condition(multi, 'type:N', alt.value('lightgray')),
+	    color = alt.condition(multi, 'offshore?:N', alt.value('lightgray')),
+	    tooltip = [alt.Tooltip('name'),alt.Tooltip('type'),alt.Tooltip('offshore?')]
 	).properties(selection = multi,width =600,height=300).interactive()
 
 	st.write('**Blade Diameter vs Nominal Power distribution**') 
