@@ -89,7 +89,7 @@ if st.sidebar.checkbox('Select a manufacturer (Optional)'):
 
 # 5. Información sobre el proyecto 		
 st.sidebar.write('---')
-with st.sidebar.beta_expander('About this project'):
+with st.sidebar.expander('About this project'):
 	'This project is a webapp able to provide a list of candidate Wind Energy Conversion System (WECS) to the user after he has selected a couple parameters. The user is able to observe and compare freely any turbine of the around 300 WECS database whenever he wants.' 
 	'Once the WECS are filtered the following values will be displayed'
 	'* Manufacturer name'
@@ -147,7 +147,7 @@ else:
 	''
 wecsSeries = pd.DataFrame()
 legend = []	
-with st.beta_expander('Show the power curve of the results'):
+with st.expander('Show the power curve of the results'):
 	'#### Graph of all the WECS that meet the user criteria'
 	fig, ax = plt.subplots()
 	for i in range(matching_wecs):
@@ -273,7 +273,7 @@ with st.beta_expander('Show the power curve of the results'):
 ' '
 ' '
 '## Additional tools for exploring the dataset'
-with st.beta_expander('Show additional analysis tools'):
+with st.expander('Show additional analysis tools'):
 
 	'Distribution of the range of nominal power of each type fo WECS in the dataset:'
 	wecs_bien = wecs[(wecs.type==1) |(wecs.type==2) |(wecs.type==3) | (wecs.type==4) | (wecs.type==0)]
@@ -330,7 +330,7 @@ with st.beta_expander('Show additional analysis tools'):
 # - Check all the data
 '### Check all the data 📥'
    
-with st.beta_expander('Show  unfiltered WECS list'):
+with st.expander('Show  unfiltered WECS list'):
 	wecs[(wecs.datavp=='v')].iloc[:,1:9]
 
 ''
