@@ -172,8 +172,8 @@ with st.expander('Show the power curve of the results'):
 	#Botón de descarga de la tabla
 	wecs_selected_download = wecs[ (wecs['power'].between(rated_power_min,rated_power_max, inclusive=False)) & (wecs["type"].isin(type_selected)) & (wecs["offshore?"]==of)]
 	wecs_selected_download = pd.concat([wecs_selected_download.iloc[:,([0,3,4,5,6])], wecs_selected_download.iloc[:,9:99]],axis = 1)
-	tmp_download_link = download_link(wecs_selected_download.T,'WECS Comparator Results'+ '.csv', wecs.iloc[w,3])
-	st.markdown(tmp_download_link, unsafe_allow_html=True)
+	#tmp_download_link = download_link(wecs_selected_download.T,'WECS Comparator Results'+ '.csv', wecs.iloc[w,3])
+	#st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 
 	'#### Individual WECS power curve'
